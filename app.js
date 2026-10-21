@@ -1,3 +1,4 @@
+import { reviewStatusView, reviewStatusReportLines } from './review-status.js';
 import { FORECAST } from './forecast-data.js';
 import { forecastView, forecastReportLines } from './forecast.js';
 import { DATA } from './data.js';
@@ -52,7 +53,7 @@ const tag = (label, tone = 'neutral') => `<span class="status-tag ${tone}"><span
 
 function shell() {
   app.innerHTML = `<div class="app-frame"><aside class="sidebar" aria-label="主导航">
-    <a href="#overview" class="brand" aria-label="Polo’s market notes · Polo 的市场解读首页"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><div><div class="brand-word">Polo’s</div><div class="brand-sub">market notes · 市场解读</div></div></a>
+    <a href="#overview" class="brand" aria-label="Polo’s market notes 首页"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><div><div class="brand-word">Polo’s</div><div class="brand-sub">market notes · 市场解读</div></div></a>
     <nav class="side-nav">${[['overview','grid','监测总览'],['chain','chain','传导链'],['outlook','inflation','研究预测'],['history','clock','检验记录'],['calendar','calendar','验证日历'],['sources','book','数据来源']].map(([id,i,label]) => `<button type="button" class="nav-button" data-view="${id}">${icon(i)}<span>${label}</span></button>`).join('')}</nav>
     <div class="nav-edition"><span class="status-dot"></span>研究工作台<span class="edition-avatar">P</span></div>
   </aside><div class="workspace"><header class="topbar"><div class="breadcrumbs"><button class="mobile-menu" type="button" data-action="menu" aria-label="打开导航" aria-expanded="false">${icon('menu')}</button><span class="muted">WORKSPACE</span>${icon('chevron','icon-sm breadcrumb-chevron')}<strong id="breadcrumb-current">监测总览</strong></div><div class="top-actions"><button type="button" class="search-trigger" data-action="search" aria-label="查找指标与来源">${icon('search','icon-sm')}<span>查找指标与来源</span><kbd>⌘ K</kbd></button><button type="button" class="export-button" data-action="export" aria-label="导出完整研究报告">${icon('download','icon-sm')}<span>导出报告</span></button></div></header><main class="content" id="main" tabindex="-1"></main></div></div>`;
@@ -64,7 +65,7 @@ function pageHeading(title, description, eyebrow = 'U.S. MARKET INTELLIGENCE', r
 }
 
 function footer() {
-  return `<footer class="page-footer"><div class="footer-left">${icon('shield')}<span>研究复核 2026.10.18 · 各指标日期单列<br>本地定时采集已启用；本页面为发布快照，未与账本实时同步。</span></div><button type="button" data-detail="method:qa">口径与核验记录 ${icon('upRight','icon-sm')}</button></footer>`;
+  return `<footer class="page-footer"><div class="footer-left">${icon('shield')}<span>研究复核 2026.10.18 · 各指标日期单列<br>公开版随完成审核的研究复核同步；观点签发日和数据观察日分别保留。</span></div><button type="button" data-detail="method:qa">口径与核验记录 ${icon('upRight','icon-sm')}</button></footer>`;
 }
 
 const chainPresentation = {
@@ -111,7 +112,7 @@ function firstDecisionCard() {
 }
 
 function overview() {
-  return `${pageHeading('把市场变化，变成可验证的判断。','从通胀、政策到利率与股票，先看证据，再形成观点。')}${keyReads()}
+  return `${pageHeading('把市场变化，变成可验证的判断。','从通胀、政策到利率与股票，先看证据，再形成观点。')}${reviewStatusView()}<p class="snapshot-baseline-label">以下为 10/18 完整金融复核的基线快照；最新已复核变化见上方，各卡片保留原观察日期。</p>${keyReads()}
     <div class="dashboard-grid"><div class="main-column"><article class="hero"><div class="hero-top"><div class="label-with-icon"><span class="pulse-dot"></span>本期主情景</div>${tag('工作判断 · 待后续验证','neutral')}</div><h2>通胀再承压，<br>盈利等待兑现。</h2><p class="hero-summary">能源推高物价，Fed 已向收紧方向调整。最近一周实际利率回落、股票仍下跌，接下来要查盈利兑现与信用压力。</p><div class="hero-bottom"><span>长期通胀失控与衰退均未确认</span><button type="button" class="text-button" data-detail="scenario:base">判断与反证 ${icon('upRight')}</button></div></article>
     <section class="card chart-card" aria-labelledby="chart-heading"><div class="chart-header"><div><div class="eyebrow">RATES / 三个核验观察点</div><h2 id="chart-heading">利率回落，尚未换来股票止稳。</h2></div><button class="round-button" type="button" data-detail="topic:rates" aria-label="查看利率指标与公开来源">${icon('upRight')}</button></div><div class="chart-summary"><div><span>名义 10 年期</span><strong class="num">5.09<small>%</small></strong></div><div><span>实际 10 年期</span><strong class="num">2.74<small>%</small></strong></div><span class="metric-badge positive">实际利率一周 −17bp</span></div><div class="chart-caption"><span class="legend"><i></i>名义收益率</span><span class="legend real"><i></i>实际收益率</span><span>美国交易日 · 2026 年</span></div>${ratesChart()}<p class="chart-note">连线仅连接三个快照，非完整日线。同期股价走弱，不能归因于“实际利率正在上升”。</p></section></div><aside class="status-rail" aria-label="采集计划与前瞻状态">${collectionCard()}${firstDecisionCard()}</aside></div>
     <section aria-labelledby="alerts-heading"><div class="section-heading"><h2 id="alerts-heading">下一步，重点盯住什么？</h2><span class="eyebrow">RISK WATCH</span></div><div class="watch-grid">${[DATA.alerts[0],DATA.alerts[1],DATA.alerts[2]].map((x,i)=>`<button type="button" class="card watch-card" data-detail="alert:${x.id}"><div class="watch-top"><span class="watch-number">0${i+1}</span>${tag(['通胀扩散','信用压力','盈利兑现'][i],'neutral')}${icon('upRight','icon-sm')}</div><h3>${esc(x.title)}</h3><p>${esc(x.summary)}</p><div class="watch-evidence"><strong class="num">${['+0.5%','+53 bp','9%'][i]}</strong><span>${['9 月 PPI · 剔除食能与贸易服务','HY OAS · 9/17 → 10/15','已报财报覆盖率 · 10/16'][i]}</span></div></button>`).join('')}</div></section>
@@ -147,7 +148,7 @@ function sourcesView() {
 function renderView(focus=false) {
   chartObserver?.disconnect();
   const main=document.getElementById('main');
-  const views={overview,chain:chainView,calendar:calendarView,sources:sourcesView,outlook:()=>pageHeading('研究预测','形成明确观点，保留依据；关键前提改变时再修订。','RESEARCH / WORKING FORECAST', FORECAST.lastEvidenceCheck.replaceAll('-', '.'))+forecastView(FORECAST)+`<details class="card formal-research"><summary>正式月度检验与条件推演 · 独立研究轨道</summary><p>本区准备状态说明更新：2026.10.21。当前 UNKNOWN 表示 10 月正式实验输入尚未齐备；各项最早可计算时间见下方。上方研究预测继续独立提供观点，手动推演不会改写判断账本。</p>${outlookView(outlookInputs,outlookSimulated)}</details><footer class="page-footer"><div class="footer-left">${icon('shield')}<span>研究预测 ${esc(FORECAST.date)} · ${esc(FORECAST.version)}<br>本页展示最近发布版本；例行复核留存本地，重大变化核验后再发布。</span></div><a href="./forecast.json" target="_blank" rel="noopener noreferrer">本版研究记录 ↗</a></footer>`,history:()=>pageHeading('金融检验记录','查看误报、漏报、提前量，以及结论的适用范围。','VALIDATION / DEVELOPMENT HISTORY')+historyView(state.historyCase)+footer()};
+  const views={overview,chain:chainView,calendar:calendarView,sources:sourcesView,outlook:()=>pageHeading('研究预测','形成明确观点，保留依据；关键前提改变时再修订。','RESEARCH / WORKING FORECAST', FORECAST.lastEvidenceCheck.replaceAll('-', '.'))+reviewStatusView()+forecastView(FORECAST)+`<details class="card formal-research"><summary>正式月度检验与条件推演 · 独立研究轨道</summary><p>本区准备状态说明更新：2026.10.21。当前 UNKNOWN 表示 10 月正式实验输入尚未齐备；各项最早可计算时间见下方。上方研究预测继续独立提供观点，手动推演不会改写判断账本。</p>${outlookView(outlookInputs,outlookSimulated)}</details><footer class="page-footer"><div class="footer-left">${icon('shield')}<span>研究预测 ${esc(FORECAST.date)} · ${esc(FORECAST.version)}<br>完成复核后同步证据摘要；重大变化才签发新观点。日期不随打开网页更新。</span></div><a href="./forecast.json" target="_blank" rel="noopener noreferrer">本版研究记录 ↗</a></footer>`,history:()=>pageHeading('金融检验记录','查看误报、漏报、提前量，以及结论的适用范围。','VALIDATION / DEVELOPMENT HISTORY')+historyView(state.historyCase)+footer()};
   main.innerHTML=(views[state.view]||overview)();
   document.querySelectorAll('[data-view]').forEach(b=>{b.classList.toggle('active',b.dataset.view===state.view);if(b.classList.contains('nav-button'))b.setAttribute('aria-current',b.dataset.view===state.view?'page':'false');});
   document.getElementById('breadcrumb-current').textContent={overview:'监测总览',chain:'传导链分析',calendar:'验证日历',sources:'指标与来源',outlook:'研究预测',history:'金融检验记录'}[state.view];
@@ -276,7 +277,8 @@ function exportReport() {
   lines.push('','【指标快照】');DATA.metrics.forEach(m=>lines.push(`${m.label}：${m.value} ${m.unit}；${m.change}`,`观察期：${m.period}；公开发布/更新：${m.releasedAt}`,m.note,...m.sourceIds.map(id=>sourceMap.get(id).url),''));
   lines.push('【持续验证窗口】','2026 年 10–11 月财报季，每周复核已报覆盖率、公开盈利预期、利润率、现金流和指引；历史个股盈利修订暂未接入。具体披露日以公司公告为准。','');
   lines.push('【验证日历 · 台北时间】');DATA.calendar.forEach(e=>lines.push(`${e.at.slice(0,10)} ${e.timeLabel} · ${e.title}`,e.question,'支持：'+e.confirmation,'推翻：'+e.falsification,'注意：'+e.caution,''));
-  lines.push('【本期金融核验】','25项现况指标核验通过；1项UNKNOWN；12项算术复算一致；不是模型成功率。',...DATA.review.limits,'完整复核：'+new URL('./financial-review.json',document.baseURI).href,'',...forecastReportLines(FORECAST),'','【独立轨道：正式实验与条件推演】',...outlookReportLines(),...historyReportLines(),'【研究口径】',...DATA.qa.map(q=>q.title+'：'+q.text),'','【公开来源】',...DATA.sources.map(s=>`${s.publisher} · ${s.name}\n${s.url}\n观察至 ${s.observedThrough}；核验 ${s.accessedAt}\n${s.note}\n`));
+  lines.push('【本期金融核验】','25项现况指标核验通过；1项UNKNOWN；12项算术复算一致；不是模型成功率。',...DATA.review.limits,'完整复核：'+new URL('./financial-review.json',document.baseURI).href,'',...reviewStatusReportLines(),
+    ...forecastReportLines(FORECAST),'','【独立轨道：正式实验与条件推演】',...outlookReportLines(),...historyReportLines(),'【研究口径】',...DATA.qa.map(q=>q.title+'：'+q.text),'','【公开来源】',...DATA.sources.map(s=>`${s.publisher} · ${s.name}\n${s.url}\n观察至 ${s.observedThrough}；核验 ${s.accessedAt}\n${s.note}\n`));
   const blob=new Blob(['\uFEFF'+lines.join('\n')],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=`Polo-market-notes-${FORECAST.date}.txt`;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);showToast('已导出含指标、反证与来源的完整报告');
 }
 

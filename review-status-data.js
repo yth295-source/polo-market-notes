@@ -1,0 +1,54 @@
+export const REVIEW_STATUS = {
+  "forecast_id": "wf-20261021-v5",
+  "review_id": "manual-earnings-valuation-rebuild-20261021-v5",
+  "review_completed_at_utc": "2026-10-21T13:24:36.595478+00:00",
+  "review_event_sha256": "f8b776f88bafb0bb047db9ad5f50bb2070fb4e8fce8506d34f0411af3e76f63c",
+  "disposition": "REVISE",
+  "evidence_health": "PARTIAL",
+  "summary": "盈利证据更具体，市场判断维持震荡与分化；撤销两项纳指缺乏独立支撑的精确目标。DCF增加资本需求约束，长期假设风险仍然显著。",
+  "scope": "本次专项核验行业盈利、9家发行人财报与估值方法。下列国债/信用复用10/21台北20:08已完成的研究复核；本轮未重新检查全部宏观发布，也未重跑历史检验。",
+  "reviewer": "Polo research · independent financial QA completed",
+  "limitations": [
+    "行业供应商部分年度表尚未对账；集中度只作为条件证据。",
+    "完整纳指前瞻EPS、季度前滚与统一聚合口径尚未验收。",
+    "正式10月末广度锚点尚未形成；不把缺失理解为无风险。",
+    "长期DCF仍依赖研究假设，无市场收敛时点或统计置信度。"
+  ],
+  "observations": [
+    {
+      "label": "10y 名义美债",
+      "value": "5.12%",
+      "observation_date": "2026-10-20",
+      "source": "美国财政部",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value=2026"
+    },
+    {
+      "label": "10y 实际美债",
+      "value": "2.77%",
+      "observation_date": "2026-10-20",
+      "source": "美国财政部",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_real_yield_curve&field_tdr_date_value=2026"
+    },
+    {
+      "label": "高收益信用利差",
+      "value": "329 bp",
+      "observation_date": "2026-10-19",
+      "source": "ICE / FRED",
+      "url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
+    },
+    {
+      "label": "CY2027 标普共识EPS",
+      "value": "421.65",
+      "observation_date": "2026-10-16估计版本",
+      "source": "FactSet",
+      "url": "https://advantage.factset.com/hubfs/Website/Resources%20Section/Research%20Desk/Earnings%20Insight/EarningsInsight_101626.pdf"
+    },
+    {
+      "label": "Nasdaq-100 收盘",
+      "value": "29,490.28",
+      "observation_date": "2026-10-20",
+      "source": "Nasdaq / FRED",
+      "url": "https://fred.stlouisfed.org/series/NASDAQ100"
+    }
+  ]
+};
