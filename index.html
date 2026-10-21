@@ -7,15 +7,15 @@
     <meta name="description" content="从通胀到美国股票，追踪主情景、风险信号和下一项验证证据。2026 年 10 月 19 日研究预测；各项数据观察日期单列。" />
     <title>Polo 的市场解读 — Polo’s market notes</title>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./history.css" />
-    <link rel="stylesheet" href="./refresh.css" />
-    <link rel="stylesheet" href="./outlook.css" />
-    <link rel="stylesheet" href="./forecast.css" />
-    <link rel="stylesheet" href="./targets.css" />
-    <link rel="stylesheet" href="./sensitivity.css" />
-    <link rel="stylesheet" href="./sp500-rebuild.css">
-    <link rel="stylesheet" href="./evidence-v5.css">
+    <link rel="stylesheet" href="./styles.css?sha256=afe5dad344221a960f32022216dd08e6161e756c5545806feadd786cba97ed31" />
+    <link rel="stylesheet" href="./history.css?sha256=73ad10374b4cc5a3455ea5f19e00ebbb0c923740536778d5a0572d113e347499" />
+    <link rel="stylesheet" href="./refresh.css?sha256=8e1ddf6a3eb9012e834c3ec148bd98c3cda9fe0cf36d645bd4c34340f403ac18" />
+    <link rel="stylesheet" href="./outlook.css?sha256=93b5112cf19dca0a05a7d7e7f7598de47b3481ce421523f1c241e58b7aa806ee" />
+    <link rel="stylesheet" href="./forecast.css?sha256=1d5cf73f0b660dd3efb4243b55a041696d9e75c5b074b6c58069bc41a94afb71" />
+    <link rel="stylesheet" href="./targets.css?sha256=ca9a03badf09491cda0476d389a28edb4969ae3a25835313ed149479ae04ac0e" />
+    <link rel="stylesheet" href="./sensitivity.css?sha256=b8bd887b4256e618bc034c9e5a52d08c6f094f5be5975ccd1360a99af24d9f1b" />
+    <link rel="stylesheet" href="./sp500-rebuild.css?sha256=498cc03361488b061f087a8f11ed415985147cde22adcc10fa6bd4e01e51b8c9">
+    <link rel="stylesheet" href="./evidence-v5.css?sha256=52a0ae6755073c905ece9606c87c2e11491cec47df482e72fb48409291a162c7">
 </head>
   <body>
     <a class="skip-link" href="#main">跳至主要内容</a>
@@ -24,6 +24,25 @@
     <dialog id="search-dialog" class="search-dialog" aria-label="查找指标与来源"></dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <noscript><div class="noscript">请启用 JavaScript 查看完整监测报告。资料核验于 2026 年 10 月 18 日；这是数据快照。</div></noscript>
-    <script type="module" src="./app.js"></script>
+    <script type="importmap">{"imports": {"./app.js": "./app.js?sha256=b559adda94cc0ccbb30bd421b8b15496d3bb20dff289f6ccc7a4919d248eec7b", "./data.js": "./data.js?sha256=fa976520a456891dffae99afe6e12a1e0d8c23826672d9d3251b0a426adfa463", "./evidence-v5.js": "./evidence-v5.js?sha256=dfb3d71035343113248ce06d3ff1ae05beca88b4e7c7746c3a16b883476f91ed", "./forecast-data.js": "./forecast-data.js?sha256=64160a84242a41673f61da10bb310903690e6e1c1f88880aae1b32f76a8cef23", "./forecast.js": "./forecast.js?sha256=ebd9c7dda43737885aa147c73e2c90bb90c23d1b504fe00c1d4d50fb48974c31", "./history-data.js": "./history-data.js?sha256=78566271f500b9aced65aef6bd9ce120ae2df0e47933f704fa8b9a857e854e52", "./history-stage3-data.js": "./history-stage3-data.js?sha256=12458586a02bf1895e2200b7a4c342c412bd1061b214eb64d95f54a00e38016c", "./history.js": "./history.js?sha256=5b4ce2c1cc879194b8eb584cfd9c8870164402636977d5cd4e007d15a1b2b404", "./outlook.js": "./outlook.js?sha256=b123c11e12298a45d61472642582003c7d3de8e9a93f0250dd02fd747239d070", "./review-status-data.js": "./review-status-data.js?sha256=286b2a6a834f40fa72d5fa1b8ec7f0038346e4f1a0d2b181932f2d8282db925d", "./review-status.js": "./review-status.js?sha256=de74441f2734ce5eb09b154562d2520d7d18541790b40c6909372a43eda22bc3", "./sensitivity.js": "./sensitivity.js?sha256=8fec070b52bf75250520502a57aeec129f37892143f980ee7a476fa282005ba6", "./sp500-rebuild.js": "./sp500-rebuild.js?sha256=30f0e62c43fbbdd6b6f3f8db4d2a2c2bb453c17b727024a71aef2f70ec3209d1", "./targets.js": "./targets.js?sha256=3a3f4ee927cd6e318d50e150a7da3d6fc7ba2305295ddb056e2d08ba4ea7ce95"}}</script>
+    <script type="module" data-polo-release="20261021T145044981862Z">
+      const expected = {"forecast_id": "wf-20261021-v5", "forecast_created_at": "2026-10-21T13:24:36.591731+00:00", "review_id": "manual-earnings-valuation-rebuild-20261021-v5", "review_completed_at": "2026-10-21T13:24:36.595478+00:00", "review_event_sha256": "f8b776f88bafb0bb047db9ad5f50bb2070fb4e8fce8506d34f0411af3e76f63c"};
+      try {
+        const [{ FORECAST }, { REVIEW_STATUS }] = await Promise.all([
+          import("./forecast-data.js?sha256=64160a84242a41673f61da10bb310903690e6e1c1f88880aae1b32f76a8cef23"), import("./review-status-data.js?sha256=286b2a6a834f40fa72d5fa1b8ec7f0038346e4f1a0d2b181932f2d8282db925d")
+        ]);
+        if (FORECAST.id !== expected.forecast_id || FORECAST.createdAtUtc !== expected.forecast_created_at ||
+            REVIEW_STATUS.forecast_id !== expected.forecast_id || REVIEW_STATUS.review_id !== expected.review_id ||
+            REVIEW_STATUS.review_completed_at_utc !== expected.review_completed_at ||
+            REVIEW_STATUS.review_event_sha256 !== expected.review_event_sha256) {
+          throw new Error('Forecast and review do not match this published release');
+        }
+        await import("./app.js?sha256=b559adda94cc0ccbb30bd421b8b15496d3bb20dff289f6ccc7a4919d248eec7b");
+      } catch (error) {
+        const app = document.getElementById('app');
+        if (app) app.innerHTML = '<div role="alert" style="padding:32px;font:16px system-ui">网页版本未能完整载入，请稍后刷新。为避免混用新旧数据，本次暂停显示研究内容。</div>';
+        console.error('Polo release integrity check failed', error);
+      }
+    </script>
   </body>
 </html>
