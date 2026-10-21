@@ -1,0 +1,179 @@
+{
+  "id": "asof-staged-breadth-and-rates-credit-v1",
+  "status": "specified_for_freeze_by_freeze_decision",
+  "client_date": "2026-10-18 Asia/Taipei",
+  "purpose": "Freeze two limited hypotheses and auditable information clocks without running new signals or performance.",
+  "prior_execution_manifest_sha256": "45b22d6a3e8d8c20456f6149a2e4c522ed6e4cd5e1a9dc6198bcfd619c7fdae8",
+  "prior_postmortem_manifest_sha256": "f83685c62468b32a77c40f8d38f368b4309a7ec83b1bb6ee660af89d15648a5e",
+  "hypothesis_budget": {
+    "primary_questions": 2,
+    "H1": "Operational usefulness of breadth WATCH and credit CONFIRMATION as separate states, compared with the simultaneous hard-AND gate.",
+    "H2": "Incremental risk identification from one independently specified real-rate channel beyond breadth/credit states.",
+    "no_search": "No alternative MA lengths, breadth thresholds, credit thresholds, rate tenors, OAS substitutions, rate horizons, recovery filters, slope gates or fitted coefficients in this version.",
+    "H1_novelty_limit": "WATCH=B andCONFIRM=B ANDT reuse already scored signals. Renaming them creates no new predictive information. H1 tests an explicit monitoring contract and false-alert burden, not a claim that a new alpha has been invented."
+  },
+  "clock_and_sampling": {
+    "timezone": "America/New_York, with DST; all receipts also stored asUTC",
+    "observation_month": "m is the immediately preceding completed calendar month relative to the decision month.",
+    "decision_rule": "09:25:00America/New_York on the fifth actual NYSE regular trading session of each calendar month.",
+    "rationale": "A fixed early-month buffer accommodates first-business-day monthly credit/rate releases and vendor EOD delivery without assuming immediate month-end availability. Five sessions is an operational schedule, not a tuned predictive parameter or a guarantee sources arrived.",
+    "first_planned_decision": "2026-11-06T09:25:00-05:00, subject to the official NYSE session calendar",
+    "forecast_commit_rule": "Complete and write an immutable forecast record no later than the scheduled cutoff. Every dependency must have been successfully received and hashed before that actual commit, which must be no later than cutoff. If pre-cutoff revisions are captured, retain superseded records and use the last valid pre-cutoff commit. Late/missing forecasts are UNKNOWN and never backfilled as prospective. Paired outcomes and leads always use the scheduled09:25decision timestamp, not an opportunistically earlier generation time.",
+    "publication_vs_receipt": "Observation time, publisher release time, ALFRED validity date, FRED ingestion time and local successful receipt are distinct. A release schedule is not actual arrival proof. lastupdated dates and current filemodified timestamps do not prove original historical receipt.",
+    "prospective_gate": "Require actual UTC receipt timestamp, raw-byte hash, provider/source identifier, observation period, as-of version and snapshot path for each dependency. If exact publisher time is unknown, leave itNULL; a genuine pre-commit receipt still proves that these bytes were available to this monitor. This admits a same-day vintage when actual receipt is proven; the historical date-only delay does not override stronger prospective receipt evidence.",
+    "historical_date_only_convention": "For secondary reconstruction, a dated ALFRED archive version is not admissible on that same date. Permit it no earlier than09:25 on a subsequent NYSE session, using the latest version whose real-time start precedes the decision date; label this ALFRED-date-level reconstruction, not proof of historical intraday FRED service or original vendorPIT.",
+    "asof_join": "For each series/observation select the latest provider vintage actually captured before the final valid commit/cutoff. All endpoints use that common decision information set/query vintage. Individual BAA/AAA or m/m-3 rows may have different realtime_start dates; do not require equal revision dates. Never permanently fix initial releases or use today's final version for a past decision. Record last successful provider version check; an unobserved public update is not silently inserted later.",
+    "freshness": "Scored B,T,R all refer to requested monthm. Missing or unreleasedm meansUNKNOWN for that channel. Show last-known older values and age only as context; do not replace m with a stale month or use the latest three published observations instead of calendar months.",
+    "closures": "Use official NYSE calendars and dated emergency-closure notices. An unexpected closure moves the ordinal fifth observed session; record the calendar version and announcement. No silent substitute trading date.",
+    "execution_reference": "No portfolio trades are specified. Forecast at09:25 precedes that day's regular close; score returns from that same decision day's SPY cash-adjusted close. The earliest hypothetical market action is after the forecast and no earlier than regular open, but no open-price trading strategy is evaluated.",
+    "no_automatic_monitor_created": true
+  },
+  "inputs": {
+    "B": {
+      "universe": "Prospectively archived vendor-as-of S&P500security membership for the closing index calculation on the last NYSE session ofm. Multiple share classes retain separate votes; permanent security IDs required.",
+      "membership_clock": "Retain source announcement receipt/publication metadata AND effective first session. Prior-open applies that session; after-close applies next observed session. A month-end vendor file may contain post-close changes, so current roster alone cannot replace an effective-dated ledger. Announced future events do not become members early.",
+      "starting_condition": "At the first prospective forecast require an archived October2026closing roster/anchor and effective-dated reconciliation by cutoff. This remains conditional vendor-as-of membership unless independently authenticated. No2018anchor can certify a future vendor feed; missing/unbounded current membership yieldsUNKNOWN rather than a fabricated complete panel.",
+      "price_basis": "Sharadar SEP close, split/stock-dividend adjusted, excluding cash-distribution/spinoff reinvestment adjustment; same field for all200sessions and current close. Prices may predate index entry for that same security. No predecessor/successor splice, last-quote fill, acquirer substitution or today's-constituent backfill.",
+      "availability": "Current vendor documentation schedules prices17:30and23:30ET, SP500table19:00ET. These are schedules, not guarantees. Archive the actual received file containing all required dates before cutoff; later corrections can affect later forecasts only.",
+      "MA": "Arithmetic mean over200actual officialNYSEcore-session dates ending at the last session ofm, including endpoint. The official session calendar fixes the window: a missing SPY quote never deletes/compresses a real exchange session. SPY is a cross-check only. All200stockquotes must be positive; current reported volume must be positive or classification remains unknown. Preserve prior stable-sum/decimal-tie arithmetic.",
+      "individual_state": "ABOVE if current close>SMA200; BELOW_OR_EQUAL otherwise; UNKNOWN for absent/nonpositive required quote, structurally short history, any nonpositive/missing current volume or uncertain identity. No ad hoc volume-corroboration exception in this version. Never call a nonexistent200sessionMA a latent observed bearish signal.",
+      "full_denominator": "Retain full effective-member denominator. For k certain members, b known ABOVE, q unknown certain-member classifications and u optional identities, safe all-admissible-imputations envelope is[b/(k+u),(b+q+u)/(k+u)]. Use coherent event paths and permanent IDs; unknown optional names are not counted again in q.",
+      "rule": "B=TRUE if upper bound<0.50; FALSE if lower bound>=0.50; UNKNOWN otherwise. Compare integer counts exactly, no epsilon. All unclassified counts and reasons are published.",
+      "stock_history_clock_limit": "A pre-cutoff full200session history is a valid vendor-as-of input even if it includes revisions already known then. It is not proof every row equaled its original trade-date publication. Save each full input vintage to prevent later revision leakage."
+    },
+    "T": {
+      "series": ["BAA", "AAA"],
+      "source": "Moody's monthly seasoned long-maturity yield indices via FRED/ALFRED; not H15corporate yields, HY OAS or matched-maturity Treasury spreads.",
+      "asof_values": "Use BAA_m,AAA_m,BAA_(m-3),AAA_(m-3) from the latest common admissible as-of information set at cutoff. Store actual real-time validity dates when provided, otherwiseNULL, plus local receipt hashes for every endpoint. A genuine prospective capturedFREDpayload can prove availability without ALFREDvalidityfields; never fabricate thosefieldsfromreceipt. Historicalreconstructionrequires genuine archiveversiondates. Initial-only downloads document first dates but cannot replace a latest-as-of revision join.",
+      "formula": "S_m=BAA_m-AAA_m; T=TRUE when round10(S_m-S_(m-3))>=0.25percentage points; FALSE otherwise. Any missing/noncomparable endpoint meansUNKNOWN. Values are percent, so0.25percentagepoints=25bp, not25percent.",
+      "existing_parameters_unchanged": true,
+      "clock_limit": "Targeted ALFRED initial dates are verified at DAY resolution. Historical source-publication and actual FRED-ingestion timestamps remainNULL where unsupported. A one-day conservative vintage convention cannot turn that into exact historical availability proof."
+    },
+    "R": {
+      "series": "FII10",
+      "family": "Official monthly average counterpart of daily DFII10:10yearTreasuryinflation-indexedconstant-maturityyield, percentNSA.",
+      "source": "Board of Governors H15 via FRED/ALFRED; use official rounded monthly series, not a locally unrounded DFII10mean.",
+      "formula": "R=TRUE when round10(FII10_m-FII10_(m-3))>=0.25percentagepoints; FALSE otherwise. Missing/unreleased requestedm or baseline meansUNKNOWN. Use both endpoints from the same latest admissible as-of information set. Finite negative real yields are valid observations, not missing or zero.",
+      "parameter_rationale": "Reuse the existing three-calendar-month change and25bp magnitude to limit degrees of freedom before inspecting rate-signal outcomes. This is an unvalidated fixed research hurdle, not proof25bp of real yields has the same economic risk as25bp of credit-quality spread.",
+      "clock": "Treasury circa15:30quote sampling is not public availability. Current Treasury publication timing differs from H15; H15scheduled16:15 generally covers prior-business-day data. Official monthlymeans normally publish aftermonthend; schedules can be delayed. Require actual capturedmonthlybytes before cutoff; do not synthesize an incomplete current month from daily quotes.",
+      "methodology": "Record the Treasury real-curve methodology version, including the2021-12-06break for any secondary history. No silent cross-method splice or parameter adjustment. Prospective2026+uses the then-current documentedmethod; future changes require a versioned amendment.",
+      "meaning_limit": "This is one real-Treasury-rate proxy, not a complete equity discount rate, enterprise refinancing quote, credit spread or demonstrated causal driver."
+    },
+    "legacy_C": {
+      "role": "Secondary diagnostic comparator only; never a primary data-eligibility gate or automatic fallback.",
+      "definition": "At least8of12Frenchvalue-weighted industry portfolios have negative compoundedtotalreturn overm-2..m; prior thresholds and rounding unchanged.",
+      "eligibility": "Require original/pre-cutoff received vintage containing requestedm. ACRSPmonthheader is not publication time; currentmonthly rebuilds and a laterFIZarchive are not old monthly vintages. If missing, C=UNKNOWN, never noalert or stale-window substitute.",
+      "comparison_limit": "Do not claim new system beatsC because C was not yet observable. Report secondary C coverage and source delays; historical C comparisons remain current-vintage/reused evidence unless a genuine archive proves otherwise."
+    },
+    "V": {
+      "role": "Valuation context only, excluded from primary gates and candidate budget in this protocol.",
+      "reason": "PreviouslyVwas alwaysTRUE in the92monthsample; Shiller earnings interpolation and historical revision clocks are unverified. A four-month shift does not restore an original vintage.",
+      "contract": "If shown later, label source version and availability and keep the old definition as context; unavailable context remainsNULL. No alternate valuation gate or V-conditioned result selection here."
+    }
+  },
+  "H1_staged_monitor": {
+    "truth_table": [
+      {"B": 0, "T": 0, "state": "NO_ACTIVE_FLAG", "meaning": "No flag under these definitions; never a safety guarantee."},
+      {"B": 1, "T": 0, "state": "BREADTH_WATCH", "meaning": "Participation weakness warrants review without waiting for credit; not a sell instruction."},
+      {"B": 1, "T": 1, "state": "CREDIT_CONFIRMED", "meaning": "Participation weakness coincides with the defined credit deterioration."},
+      {"B": 0, "T": 1, "state": "CREDIT_ONLY", "meaning": "Credit warning remains visible even without breadth weakness; do not label all-clear."}
+    ],
+    "binary_outputs": {"WATCH": "B", "CONFIRMED": "B AND T", "CREDIT_ONLY": "T AND NOT B", "BASE_ANY": "B OR T"},
+    "transitions": "Evaluate at each scheduled cutoff without persistence filters. B rising fromFALSE toTRUE starts WATCH; T becomingTRUE whileBTRUE is an upgrade. T falling whileBremainsTRUE returns toWATCH; Bfalling whileTTRUE becomesCREDIT_ONLY. Do not infer an economic causal sequence from simultaneous flags.",
+    "notification_contract": "Log all state transitions. A risk-review notice occurs onNO_ACTIVE_FLAGtoanyactiveH1state, WATCHorCREDIT_ONLYtoCREDIT_CONFIRMED, WATCHtoCREDIT_ONLYorCREDIT_ONLYtoWATCH(channelchange), andRbecomingTRUEin the extendedmonitor evenifanotherchannelalreadyactive. CREDIT_CONFIRMEDtoWATCHorCREDIT_ONLYis a downgrade: recordit but no new escalation notice. Identical persistent states and resolutiontoNO_ACTIVE_FLAG create no escalation notice. Multiple entries/upgrades inside one run countseparately. Unknown predecessor states imply notification-countbounds ratherthanassumednewentry. Every active monthly decision stays in error/occupancy counts. These are specified records, not an automation or external message created now.",
+    "notice_accounting": "Apply notice budgets separately to each monitor. H1/BASE counts only the qualifying B/T state edges defined above. H2/EXTENDED counts those same edges plus R=FALSEtoTRUE. Within each monitor and scheduled cutoff, take the union of all qualifying reasons as ONE review notice, retaining every reason; a maturedY=0 marks that notice false only once. Unknown predecessor/edge status is evaluated on the same coherent path before unioning; never add independent reason-count bounds. The H1 and H2 notice totals are paired alternative-monitor reports, not a combined sum.",
+    "unknown_logic": "Preserve all possible states consistent with observed inputs; never forceUNKNOWN toFALSE. KnownFALSE makes anANDfalse; knownTRUE makes anORtrue. Missing earlier history leaves a first active run left-censored. An unknown gap can bridge/split a run, so no invented reset or fresh notification.",
+    "operational_test": "Does making the earlier breadth information visible provide useful prior-to-confirmation lead under explicit review burden? It cannot outperformBalone through renaming and does not constitute a new predictive model.",
+    "phase": "Record previously observable ongoing-crisis/recovery context separately. It never suppresses a state or changes15percent labels; no recovery/slope/direction gate in this version."
+  },
+  "H2_separate_channels": {
+    "rate_credit_states": "Report T/R asneither,credit-only,rate-only,both,orpartialUNKNOWN. These are measured channels, not causal attribution of equity moves.",
+    "binary_outputs": {"RATE_WATCH": "R", "EXTENDED_ANY": "B OR T OR R", "INCREMENTAL_RATE": "R AND NOT(B OR T)", "RATE_WHILE_CREDIT_QUIET": "R AND NOT T"},
+    "primary_increment": "Paired EXTENDED_ANY minusBASE_ANY on identical scheduled dates and outcome definitions. A rate flag whileBalready warns is channel context, not a newly captured crisis or an earlier combined warning.",
+    "comparison": "Report Ralone, Talone, Balone, CONFIRMED, BASE_ANY, EXTENDED_ANY and the quiet-credit strata. No new fitted weights or extra conjuncts.",
+    "interpretation": "This tests whether common-rate information adds something not in the quality differential; it does not infer that observed Treasury rates caused any particular crisis."
+  },
+  "outcomes": {
+    "instrument": "SPYfundscloseadj, cash-distribution-adjusted ETF return proxy with tracking/fee differences; no portfolio trading or tax/cost strategy tested.",
+    "origin": "Regular-session close of the precommitted decision date, after the09:25forecast cutoff. The closing reference price is an outcome field and is not known or inserted into the forecast at09:25.",
+    "future_endpoints": "The first six regularNYSEcalendar-month-end closes strictly after the origin close. Afirst-weekdecision's first endpoint is thatsamecalendar month's lastsession. Report exact calendar-day lengths; endpoint1/3/6 means first/third/sixth subsequentmonthend, not exact30/90/180days.",
+    "loss_label": "Y=1 if any of those6cumulativecloseadjreturns<=-0.15; else0. Require all6outcomes for every primary-scored origin, including early positives. Immature or missing outcomes remain unscored/UNKNOWN, not false alarms.",
+    "return_reports": "For every origin retain endpoint1,3,6returns and minimumover1..6. Do not alter15percent threshold or choose daily lows to rescue a monthly alert.",
+    "outcome_vintage_lock": "Primary performance is calculated once using a coherent archivedSPYfundsfile received by18:00ET on the tenthNYSEsessionafter2030-03monthend. Savehash for all origins/endpoints in thatsamevintage. If unavailable, label corresponding outcomesUNKNOWN; do not select a later favorable snapshot. Subsequent pricecorrections are versioned sensitivity only.",
+    "episodes": "MonthlySPYcloseadjdrawdown from runningmonth-endhigh since1997-12-31; first<=-15percentcross is a crisis; recoverytopriorpeakresets. Preserve ongoingleft-censored episodes. Not a full-century all-time high or daily-drawdown definition.",
+    "primary_lead_window": "For monthlycross timestampc at16:00ET(orofficialearlyclose), eligible forecasttimestampsd satisfy c-minus6calendar-months<=d<=c-minus1calendar-month. Report exactdays, runonset lead and whetherbefore/after the priorpeak. Subtract calendar months with end-of-monthclamping, not30daymultiples.",
+    "short_and_late": "Aforecast between c-minus1month andc is a short-lead observation, reported separately, not a full1monthlead. Forecastsat/afterc arelate/ongoing. Samecalendar-monthfirst-weekforecasts may precedec but cannot be called a fullmonthinadvance.",
+    "one_credit_matching": "Build maximal consecutiveTRUEruns on the full scheduleddecisioncalendar for each coherent data path. Process crises chronologically; choose earliest-onset unused eligible run. One run and one episode receive at mostone independentcredit. Supportedduplicateruns, late/ongoing runs, unsupported runs and right-censored runs are separate. A long constant warning cannot claim everycrisis or a freshsixmonthtiming call.",
+    "episode_boundaries": "Primary episode population contains crossings whose complete set of scheduledcutoffs in the1..6calendar-month window lies inside the fixedcohort. Population is calendar-based, never chosen by actualdatacompleteness. Missing in-cohortforecasts remain unknown opportunities. Mandatorily list everyothercrossing from firstorigin through2030-03 with left/rightcensored opportunity bounds; never drop edgecrises or count absent outerforecasts asfalse.",
+    "target_distinction": "Origin-relative futureloss and priorpeak-crossing are different outcomes. Maintain two tables and never infer one setofTP/FP/FN from the other."
+  },
+  "metrics_and_burden": {
+    "all_primary_dates": 36,
+    "monthly": ["TP FP FN TN counts and identified bounds", "precision recall FPR", "activefraction", "UNKNOWNfraction", "paired incrementalTP FP FN and lead", "future1/3/6returns after falsealerts"],
+    "episode": ["uniqueeligiblehits/misses", "actualdaylead and calendarleadwindow", "prepeak versuspostpeak", "runonset versusfirsteligiblealert", "shortlead late ongoing duplicate and edgecensored counts"],
+    "two_false_run_definitions": {
+      "loss_false_run": "Aclosedrun is a primary-loss false run only when every TRUEorigin in it is fullymatured and none hasY=1. Anyruncontaining a knownY1origin is definitivelynotloss-false eveniftailcensored. Otherwise unknownoutcomes/coherentgapcompletions yieldfinitebounds: atmostonepossiblefalsecount per resulting observed run/segment ineachcompletion, never anunboundednumberofhypotheticalfuturewarnings. Anendedcohort-edgeTRUErun remainsrightcensored ratherthanassumedclosed. This target governs the review-burden caps below.",
+      "episode_unsupported_run": "Separately classify lackofeligiblefuturecrisis support, with completeforwardopportunities; supportedduplicates and late/ongoing runs do not become independentfalsecrises. Never substitute this count for primaryloss-false-runburden."
+    },
+    "working_capacity_assumptions": "These are declared research review-capacity budgets, not a measured optimum, portfolio utility, or a user-confirmed loss tolerance. They are fixed now and cannot suppress emittedsignals or change classifications.",
+    "frozen_capacity_caps_36_decisions": {
+      "WATCH_primary_loss_false_runs_max": 12,
+      "CONFIRMED_primary_loss_false_runs_max": 6,
+      "CREDIT_ONLY_primary_loss_false_runs_max": 6,
+      "incremental_RATE_primary_loss_false_runs_max": 6,
+      "BASE_ANY_active_decisions_max": 18,
+      "EXTENDED_ANY_active_decisions_max": 18,
+      "all_risk_review_notices_max": 18,
+      "primary_loss_false_review_notices_max": 12,
+      "explanation": "WATCH false-run budget permits at mostone unsupportedrun perquarter onaverage; eachhigher-priorityoradditionalchannel atmosttwo/year. Notice budgets separately cap repeated tier entries/upgrades; a notice at a maturedY0origin is a false review notice even if its wider run contains a differentY1origin. Any-riskoccupancycap prevents an always-on monitorpassing merelyby mergingmonthsintoone run. Still publish everyFPmonth and allnotifications."
+    },
+    "uncertainty": "All36scheduledorigins and all eligiblecrises remain denominators. Enumerate coherent missing-membership/classification/inputavailability paths wherefeasible; otherwise report conservativeidentifiedbounds explicitly. Unknown is never noalert, a droppedmonth, an inventednewrun or the most favorable path. Bounds are sensitivity ranges, not statisticalconfidenceintervals or bounds on undiscoveredvendorerror.",
+    "rates_increment": "Paircandidate andbaseline within the SAMEadmissiblepath. Report INCREMENTAL_RATE dates and additionalcorrect/falsewarnings, plus RwhileTquiet. Do not count an existingBwarning as newpredictivevalue.",
+    "statistics": "Monthly6endpointlabels overlap and rarecriseslimit independent evidence. No ordinaryiidmonth-basedsignificancetest, fittedprobability or historicalwinnerselection. Count episodes/runs and leaveeach eligiblecrisisout without refitting as influenceanalysis."
+  },
+  "validation": {
+    "already_seen_development": "All prior historical macro/industry results,2019..2026stock-breadth results and fivepostmortemcases are reused development evidence. Newrateinput, ALFREDvintage or a newtimeclock cannot make these outcomesunseen. Older authenticatedhistory is not automaticallyuntouched either.",
+    "historical_secondary_track": "Any later authorized reconstructed-historyrun is engineering/exploratoryonly, reportsallfrozenhypotheses and labels as-oflimitations; it supplies no primaryout-of-samplepromotion evidence. No such run occurs during thisfreeze.",
+    "primary_prospective_cohort": "36scheduledmonthlydecisions,2026-11through2029-10inclusive; requested observationmonths2026-10through2029-09. Firstpossibleforecast2026-11-06at09:25ETifactuallyrecorded. No forecast orcollectionautomation is being startednow.",
+    "maturity": "Firstorigin's6thfuturemonthend is2027-04; lastorigin's6thfuturemonthend is2030-03. Fullprimaryevaluationonlyafterthefixedoutcomevintagelock inApril2030. Missingpredictionsremainmissing even ifmarket outcomes laterbecomeknown.",
+    "quality_reviews": "At12and24scheduledrecords inspectonlytimestamp/completeness/schema/sourcechanges, not candidateaccuracy or thresholdrankings. Liveforecaststateandmarketoutcomescannotbephysicallyblinded, but any unplannedperformanceinspection must be logged and neverused to alter thiscohort's rules.",
+    "stopping": "No performance-driven earlystop, winningcaseextension or samplecutoffchange. If a sourcefails, keep UNKNOWNrecordsandfixedcohort; a separatelyversionedfuturecohort may be specified without erasing thisone.",
+    "data_sufficiency": "Atleast33of36scheduleddecisions must have timelyprovenance and definite B/T booleans forH1 and B/T/R forH2. B maycontain bounded unclassified individualstocks if its entire envelope identifies the same boolean; missingrawdependency or threshold-straddling state is not complete. Primarymetrics still retainall36withbounds. Fewer than3independentfully-opportunitycrises means predictiveepisodevalidation remainsINCONCLUSIVE, regardlessofzeroFP or apparentlyhighrecall.",
+    "no_random_split": true,
+    "no_future_backfill": true
+  },
+  "decision_and_falsification": {
+    "H1_operational_support_requires": [
+      "Timely-data sufficiency and every applicable capacity cap satisfied under pessimisticadmissiblebounds.",
+      "In atleast2differenteligiblecrises, a definite B=TRUE,T=FALSE BREADTH_WATCH inside the primary1..6calendar-monthpre-crosswindow leads the earliest CONFIRMED decision in[c-minus6months,c] by atleastonecalendar-month, or supplies thateligiblewarning whereCONFIRMED neverappears in thatentire comparisonwindow under EVERYadmissiblepath. Anunknownconfirmation is not absent. Use earliestwatch/confirmation dates, retainleft-censoredonsets and allshortleadstates. Bothalready-late states, BTRUEwithTUNKNOWN, or simultaneousconfirmation do not establish an earlier unconfirmedwatch.",
+      "Atleastone suchusefulepisode remains afterremoving the bestsingleepisode without refitting.",
+      "Every WATCHfalsemonth/run and missedcrisis is reported. Supportmeans an acceptable monitoringorganization only; no incrementalpredictionclaim beyondthealreadyreported B/Tbits."
+    ],
+    "H1_not_supported_if": [
+      "Earlierwatches are mainly false/late/recovery observations andexceedthefixedburdenbudgets.",
+      "No usefulpre-confirmationlead, or apparentvaluecomesonlyfromrenamingtheexistingstates, hiding WATCHfalsealerts or creditingoneconstantrunmorethanonce.",
+      "Any claimedadvantage requires a lowercreditthreshold, a slope/recoveryfilter or one favoredcrisis."
+    ],
+    "H2_predictive_support_requires": [
+      "Timely-data sufficiency and extendedmonitor/incrementalrateburden caps satisfied under pessimisticbounds.",
+      "PairedEXTENDED_ANYversusBASE_ANY has at leastoneadditionalprimarymonthlyTP and no reduction in uniqueeligibleepisodehits; anORjoiningrunmaymergeepisodes, so thisis checked ratherthanassumed.",
+      "Atleast2independenteligiblecrises gain eitheranewvalidwarning or atleastonecalendar-month earlier firsteligiblewarning fromR; creditisquiet attheseincrementalratedecisions and the baseline wasnotalreadywarning then.",
+      "Atleastone independentincrement remains after removingthebestepisode; reportRalone toavoidcallingarate-onlyeffectamultifactoradvantage."
+    ],
+    "H2_not_supported_if": [
+      "As-ofratesdo not addwarningswhilethebaseline isquiet, or mainlyaddnon-lossalerts beyondbudget.",
+      "Anyapparentadvancewarningrequires inputavailabilitybeforetheactualrelease, arrivesonlyafterthetargetdecline, ordependsononecrisis.",
+      "It addsinterpretivechannelcontextbutnoincrementalprediction; thatmayremaincontextonly, notapromotedwarning."
+    ],
+    "applicable_budgets": "H1appliesWATCH,CONFIRMED,CREDIT_ONLYfalse-run caps,BASE_ANYoccupancy andbothnoticecaps. H2appliesincremental_RATEfalse-run cap,EXTENDED_ANYoccupancy andbothnoticecaps for the extendedmonitor. Report everyothercaptoo, without outcome-dependent substitution.",
+    "formal_disposition": "First flag any timing/integrity/protocolbreach asNOT_EVALUABLE_PROTOCOL_BREACH, not economicfalsification. Separately label operationalburdenUNACCEPTABLE when any applicable lowerbound exceedsitscap,WITHIN_BUDGET onlywhen everyupperbound satisfiesitscap,otherwiseUNCERTAIN. Predictivesupportrequires timelydata/eventminimums, pessimisticlowerbenefits meetingALLfixedhurdles andupperburdenbounds withinALLapplicablecaps. With sufficientdata/events, optimisticupperbenefits stillbelow any hurdle or definitelybreachedcapacity yieldsNOT_SUPPORTED_FOR_USE; overlappingbounds yieldINCONCLUSIVE. Insufficientevents/data leaves predictiveeffectINCONCLUSIVE even when operationalburdenisclearlyunacceptable. Never equate insufficient evidence with proofnoeconomicrelationship.",
+    "three_outcomes": "SUPPORTED_FOR_LIMITED_USE,NOT_SUPPORTED_FOR_USE,orINCONCLUSIVE, plus a separate protocol-integrity status. H1support is operationalorganization, notnewpredictionbeyondB/T. Noneisaproofofcausality oraguaranteeofreturn.",
+    "dashboard": "No dashboardchange inthisturn. Evenfuturesupportrequiresaseparatereviewmatchingliveimplementationanddefinitions; noautomaticpromotion orcrashprobability."
+  },
+  "change_control": {
+    "revisions": "Futuredecisions mayuse newlyreleasedrevisionsknownbytheircutoffs; oldforecastbytesandstatesneveroverwritten. Revisedhistoricalprices/indicesdonotretroactivelyimproveanoldprediction.",
+    "errors": "Recordconfirmedimplementation/dataerrors,newversionandaffectedrecords. Preserveoriginalcohortandreportcorrectedsensitivitysidebyside; do notcallanoutcome-informedrepairanewuntouchedtest.",
+    "method_changes": "Aproviderdefinition/curve/universechangeistracked; noncomparableinputsareUNKNOWNuntilversionedacceptance. Nopost-resultsplicingorparameterretuning.",
+    "execution_status": "Designandauditonly. No newH1/H2featurevalues,predictions,forecasts,backtests,regressionsorautomationshavebeencomputed/startedbythisprotocolfreeze."
+  }
+}

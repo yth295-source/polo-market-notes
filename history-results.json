@@ -1,0 +1,1248 @@
+{
+  "id": "historical-pilot-v1",
+  "run_date": "2026-10-17",
+  "design": {
+    "version": "historical-pilot-v1",
+    "specified_before_running": true,
+    "scope": "Retrospective research pilot; not a live or point-in-time trading model",
+    "sample_start": "1990-01",
+    "sample_end": "2025-06",
+    "last_outcome_month": "2025-12",
+    "target": "Any of the next six month-end cumulative total returns from the signal month is <= -15%; not daily maximum drawdown",
+    "features": [
+      {
+        "id": "core_cpi_3m",
+        "formula": "100*((CPILFESL[t-1]/CPILFESL[t-4])^4-1)",
+        "flag": ">=3 percent"
+      },
+      {
+        "id": "ff_change_12m",
+        "formula": "FEDFUNDS[t-1]-FEDFUNDS[t-13]",
+        "flag": ">=1 percentage point"
+      },
+      {
+        "id": "curve_10y_3m",
+        "formula": "GS10[t-1]-TB3MS[t-1]",
+        "flag": "<=0 percentage points"
+      },
+      {
+        "id": "credit_change_3m",
+        "formula": "(BAA[t-1]-AAA[t-1])-(BAA[t-4]-AAA[t-4])",
+        "flag": ">=0.25 percentage points"
+      }
+    ],
+    "lag": "All predictor input observations lagged one calendar month for a conservative publication proxy; revised current vintage remains a limitation",
+    "flags": "Equal-weight count of the four flags. Caution if count >=2. No threshold search.",
+    "model": "Ridge logistic regression: standardized four features, intercept unpenalized, sum negative log likelihood + 0.5*sum(beta^2); fixed penalty 1, no tuning",
+    "train": "1990-01 through 2011-06; six-month purge before fixed 2012 boundary",
+    "holdout": "2012-01 through 2025-06; outcomes available through 2025-12",
+    "baseline": "Constant training event prevalence on holdout",
+    "metrics": [
+      "Brier score",
+      "AUC",
+      "event count and event prevalence",
+      "risk-flag conditional event rates"
+    ],
+    "cases": [
+      "1999-12",
+      "2000-02",
+      "2007-09",
+      "2017-12",
+      "2020-01",
+      "2021-12"
+    ],
+    "limit": "Overlapping labels, few independent crises, current-vintage revisions, no valuations/earnings, broad market not Nasdaq, monthly not intramonth losses, observational not causal, no 2026 model forecast"
+  },
+  "design_sha256": "6dec69d3a2219c87666de7f9e44b02d1f6bf87dd883ecae9b88c54139b6b94cb",
+  "script_sha256": "2459de6f23e5368cc93a2984774da4d1bdef0686f333d52024c76765e3119d8b",
+  "headline": "Retrospective fixed-design pilot; evaluate holdout before interpreting 2000 examples",
+  "sources": [
+    {
+      "id": "CPILFESL",
+      "page_url": "https://fred.stlouisfed.org/series/CPILFESL",
+      "download_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPILFESL&cosd=1988-01-01&coed=2025-12-31",
+      "file": "raw/CPILFESL.csv",
+      "retrieved_utc": "2026-10-17T13:35:15.707804+00:00",
+      "sha256": "a5e710e357509f49bf4f05e015a2b3dd56a310140b09e65cb986a93a23179e55",
+      "bytes": 8683,
+      "name": "Core CPI, seasonally adjusted index",
+      "used_range": "1988-01 through 2025-12"
+    },
+    {
+      "id": "CPIAUCSL",
+      "page_url": "https://fred.stlouisfed.org/series/CPIAUCSL",
+      "download_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL&cosd=1988-01-01&coed=2025-12-31",
+      "file": "raw/CPIAUCSL.csv",
+      "retrieved_utc": "2026-10-17T13:35:15.659353+00:00",
+      "sha256": "29dc7efc0af5b4820c9455b1aba928517ec4be65f9237f79788742579d30911e",
+      "bytes": 8683,
+      "name": "Headline CPI, seasonally adjusted index (descriptive only)",
+      "used_range": "1988-01 through 2025-12"
+    },
+    {
+      "id": "FEDFUNDS",
+      "page_url": "https://fred.stlouisfed.org/series/FEDFUNDS",
+      "download_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS&cosd=1988-01-01&coed=2025-12-31",
+      "file": "raw/FEDFUNDS.csv",
+      "retrieved_utc": "2026-10-17T13:35:15.787048+00:00",
+      "sha256": "be0499b54170d85b125b895c3df1bd4e788aec31d401aa10a3df29ca4386d249",
+      "bytes": 7322,
+      "name": "Effective federal funds rate, monthly average",
+      "used_range": "1988-01 through 2025-12"
+    },
+    {
+      "id": "GS10",
+      "page_url": "https://fred.stlouisfed.org/series/GS10",
+      "download_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GS10&cosd=1988-01-01&coed=2025-12-31",
+      "file": "raw/GS10.csv",
+      "retrieved_utc": "2026-10-17T13:35:15.579931+00:00",
+      "sha256": "ee9e4413c1cbdfc99679f9813e11f524683cfb524eca244e7ccce14ecae2175d",
+      "bytes": 7318,
+      "name": "10-year Treasury constant maturity yield, monthly average",
+      "used_range": "1988-01 through 2025-12"
+    },
+    {
+      "id": "TB3MS",
+      "page_url": "https://fred.stlouisfed.org/series/TB3MS",
+      "download_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=TB3MS&cosd=1988-01-01&coed=2025-12-31",
+      "file": "raw/TB3MS.csv",
+      "retrieved_utc": "2026-10-17T13:35:15.534165+00:00",
+      "sha256": "fb73f4d61ea0f6ba11ae93e66263bd6a3cf84748eb6a59a7a438889c040e3ad0",
+      "bytes": 7319,
+      "name": "3-month Treasury bill yield, discount basis, monthly average",
+      "used_range": "1988-01 through 2025-12"
+    },
+    {
+      "id": "BAA",
+      "page_url": "https://fred.stlouisfed.org/series/BAA",
+      "download_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=BAA&cosd=1988-01-01&coed=2025-12-31",
+      "file": "raw/BAA.csv",
+      "retrieved_utc": "2026-10-17T13:35:15.514023+00:00",
+      "sha256": "01d6aa365f7749707c13b973ada2ce8cb656ae3d9c2f5aad16abf75dde6461d6",
+      "bytes": 7349,
+      "name": "Moody's seasoned Baa corporate bond yield, monthly average",
+      "used_range": "1988-01 through 2025-12"
+    },
+    {
+      "id": "AAA",
+      "page_url": "https://fred.stlouisfed.org/series/AAA",
+      "download_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=AAA&cosd=1988-01-01&coed=2025-12-31",
+      "file": "raw/AAA.csv",
+      "retrieved_utc": "2026-10-17T13:35:15.769269+00:00",
+      "sha256": "47ce1513762e7b90522600672388149e2c784e4ddf0809824d44c0a332724c37",
+      "bytes": 7318,
+      "name": "Moody's seasoned Aaa corporate bond yield, monthly average",
+      "used_range": "1988-01 through 2025-12"
+    },
+    {
+      "id": "NASDAQCOM",
+      "page_url": "https://fred.stlouisfed.org/series/NASDAQCOM",
+      "download_url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=1988-01-01&coed=2025-12-31",
+      "file": "raw/NASDAQCOM.csv",
+      "retrieved_utc": "2026-10-17T13:35:17.524246+00:00",
+      "sha256": "a9c4476d70b79bbcd9217901f5144f62d5e5c475e7fbf955f8a53cc96bb89eb2",
+      "bytes": 195031,
+      "name": "Nasdaq Composite daily price index, FRED/Nasdaq",
+      "used_range": "1988-01 through 2025-12"
+    },
+    {
+      "id": "french_market",
+      "page_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
+      "download_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip",
+      "file": "raw/french_factors.zip",
+      "retrieved_utc": "2026-10-17T13:35:16.537560+00:00",
+      "sha256": "593f4fbef03181bc0b22ff6292f217689dd1fb79355049ca905d95b262040a66",
+      "bytes": 13065,
+      "name": "Kenneth French US market research total returns",
+      "used_range": "1990-01 through 2025-12"
+    }
+  ],
+  "source_series": {
+    "CPILFESL": "Core CPI, seasonally adjusted index",
+    "CPIAUCSL": "Headline CPI, seasonally adjusted index (descriptive only)",
+    "FEDFUNDS": "Effective federal funds rate, monthly average",
+    "GS10": "10-year Treasury constant maturity yield, monthly average",
+    "TB3MS": "3-month Treasury bill yield, discount basis, monthly average",
+    "BAA": "Moody's seasoned Baa corporate bond yield, monthly average",
+    "AAA": "Moody's seasoned Aaa corporate bond yield, monthly average"
+  },
+  "french_file_header": [
+    "This file was created using the 202608 CRSP database.",
+    "The 1-month TBill rate data until 202405 are from Ibbotson Associates. Starting from 202406, the 1-month TBill rate is from ICE BofA US 1-Month Treasury Bill Index. ",
+    "The annual TBill return is compounded from the monthly T-bill rates from January to December. ",
+    ""
+  ],
+  "target_market": "Broad US CRSP value-weighted market total return from French Mkt-RF + RF, not S&P 500 or Nasdaq",
+  "sample": {
+    "first_signal": "1990-01",
+    "last_signal": "2025-06",
+    "months": 426,
+    "last_outcome": "2025-12",
+    "purged_signal_months": "2011-07 through 2011-12"
+  },
+  "feature_definitions": [
+    {
+      "id": "core_cpi_3m",
+      "formula": "100*((CPILFESL[t-1]/CPILFESL[t-4])^4-1)",
+      "flag": ">=3 percent",
+      "label": "核心 CPI 三个月年化",
+      "unit": "%",
+      "source_ids": [
+        "CPILFESL"
+      ],
+      "lag_months": 1
+    },
+    {
+      "id": "ff_change_12m",
+      "formula": "FEDFUNDS[t-1]-FEDFUNDS[t-13]",
+      "flag": ">=1 percentage point",
+      "label": "有效联邦基金利率十二个月变动",
+      "unit": "percentage points",
+      "source_ids": [
+        "FEDFUNDS"
+      ],
+      "lag_months": 1
+    },
+    {
+      "id": "curve_10y_3m",
+      "formula": "GS10[t-1]-TB3MS[t-1]",
+      "flag": "<=0 percentage points",
+      "label": "10 年国债−3 个月国库券月均利差",
+      "unit": "percentage points",
+      "source_ids": [
+        "GS10",
+        "TB3MS"
+      ],
+      "lag_months": 1
+    },
+    {
+      "id": "credit_change_3m",
+      "formula": "(BAA[t-1]-AAA[t-1])-(BAA[t-4]-AAA[t-4])",
+      "flag": ">=0.25 percentage points",
+      "label": "Baa−Aaa 收益率差三个月变化",
+      "unit": "percentage points",
+      "source_ids": [
+        "BAA",
+        "AAA"
+      ],
+      "lag_months": 1
+    }
+  ],
+  "model": {
+    "features": [
+      "core_cpi_3m",
+      "ff_change_12m",
+      "curve_10y_3m",
+      "credit_change_3m"
+    ],
+    "training_mean": {
+      "core_cpi_3m": 2.544950730153067,
+      "ff_change_12m": -0.4222868217054263,
+      "curve_10y_3m": 1.8720542635658914,
+      "credit_change_3m": -0.0005038759689922511
+    },
+    "training_std": {
+      "core_cpi_3m": 1.1104653377141012,
+      "ff_change_12m": 1.5704723907590386,
+      "curve_10y_3m": 1.1964061352510351,
+      "credit_change_3m": 0.2552171479752797
+    },
+    "intercept": -2.2374772150669817,
+    "coefficients_per_training_sd": {
+      "core_cpi_3m": -0.1904763194626178,
+      "ff_change_12m": -1.05685666501082,
+      "curve_10y_3m": -0.5284866237795206,
+      "credit_change_3m": 0.1801019287493425
+    },
+    "solver": {
+      "iterations": 7,
+      "max_abs_gradient": 6.217248937900877e-15
+    },
+    "penalty": 1,
+    "status": "failed_on_fixed_holdout; do not use as a live crash probability",
+    "constant_train_event_probability": 0.12790697674418605,
+    "performance": {
+      "train": {
+        "months": 258,
+        "event_months": 33,
+        "event_rate": 0.12790697674418605,
+        "positive_forward_6m_months": 181,
+        "mean_forward_1m": 0.00833100775193798,
+        "mean_forward_3m": 0.02464761357010076,
+        "mean_forward_6m": 0.05012677622306497,
+        "median_forward_6m": 0.061491689797489424,
+        "mean_min_forward_6m": -0.035313564342351195,
+        "brier": 0.0941309708757952,
+        "constant_train_baseline_brier": 0.11154678204434829,
+        "always_no_event_brier": 0.12790697674418605,
+        "auc": 0.7582491582491583,
+        "mean_model_score": 0.12790697674418605,
+        "min_model_score": 0.011300954718986319,
+        "max_model_score": 0.8290128262761902,
+        "event_clusters": [
+          {
+            "start": "1990-05",
+            "end": "1990-07",
+            "signal_months": 3
+          },
+          {
+            "start": "1998-03",
+            "end": "1998-04",
+            "signal_months": 2
+          },
+          {
+            "start": "1998-06",
+            "end": "1998-07",
+            "signal_months": 2
+          },
+          {
+            "start": "2000-08",
+            "end": "2000-10",
+            "signal_months": 3
+          },
+          {
+            "start": "2001-01",
+            "end": "2001-01",
+            "signal_months": 1
+          },
+          {
+            "start": "2001-04",
+            "end": "2001-06",
+            "signal_months": 3
+          },
+          {
+            "start": "2002-01",
+            "end": "2002-06",
+            "signal_months": 6
+          },
+          {
+            "start": "2008-04",
+            "end": "2008-12",
+            "signal_months": 9
+          },
+          {
+            "start": "2011-03",
+            "end": "2011-06",
+            "signal_months": 4
+          }
+        ],
+        "classification_threshold": 0.5,
+        "confusion": {
+          "tp": 3,
+          "fp": 3,
+          "tn": 222,
+          "fn": 30
+        },
+        "precision": 0.5,
+        "recall": 0.09090909090909091,
+        "caution_flag_months": 30,
+        "caution_flag_false_positive_months": 27,
+        "caution_flag_precision": 0.1,
+        "caution_flag_recall": 0.09090909090909091
+      },
+      "holdout": {
+        "months": 162,
+        "event_months": 6,
+        "event_rate": 0.037037037037037035,
+        "positive_forward_6m_months": 134,
+        "mean_forward_1m": 0.012105555555555562,
+        "mean_forward_3m": 0.035832331936919766,
+        "mean_forward_6m": 0.07352864634972191,
+        "median_forward_6m": 0.07637892697514903,
+        "mean_min_forward_6m": -0.018362203311801356,
+        "brier": 0.0510560316930048,
+        "constant_train_baseline_brier": 0.043922640866935085,
+        "always_no_event_brier": 0.037037037037037035,
+        "auc": 0.49038461538461536,
+        "mean_model_score": 0.10718128227644357,
+        "min_model_score": 0.0076534566013194165,
+        "max_model_score": 0.7335742737503034,
+        "event_clusters": [
+          {
+            "start": "2019-11",
+            "end": "2020-01",
+            "signal_months": 3
+          },
+          {
+            "start": "2021-12",
+            "end": "2022-01",
+            "signal_months": 2
+          },
+          {
+            "start": "2022-03",
+            "end": "2022-03",
+            "signal_months": 1
+          }
+        ],
+        "classification_threshold": 0.5,
+        "confusion": {
+          "tp": 0,
+          "fp": 3,
+          "tn": 153,
+          "fn": 6
+        },
+        "precision": 0.0,
+        "recall": 0.0,
+        "caution_flag_months": 28,
+        "caution_flag_false_positive_months": 28,
+        "caution_flag_precision": 0.0,
+        "caution_flag_recall": 0.0
+      }
+    }
+  },
+  "flags": {
+    "full": {
+      "baseline": {
+        "months": 426,
+        "event_months": 39,
+        "event_rate": 0.09154929577464789,
+        "positive_forward_6m_months": 321,
+        "mean_forward_1m": 0.009727230046948358,
+        "mean_forward_3m": 0.029502829512899054,
+        "mean_forward_6m": 0.05996664304824429,
+        "median_forward_6m": 0.06952294190911468,
+        "mean_min_forward_6m": -0.02846613226957377
+      },
+      "caution_ge2": {
+        "months": 58,
+        "event_months": 3,
+        "event_rate": 0.05172413793103448,
+        "positive_forward_6m_months": 46,
+        "mean_forward_1m": 0.010620689655172407,
+        "mean_forward_3m": 0.03786815524967238,
+        "mean_forward_6m": 0.078838693221305,
+        "median_forward_6m": 0.09628979796161363,
+        "mean_min_forward_6m": -0.01875971502948876
+      },
+      "not_caution_lt2": {
+        "months": 368,
+        "event_months": 36,
+        "event_rate": 0.09782608695652174,
+        "positive_forward_6m_months": 275,
+        "mean_forward_1m": 0.009586413043478263,
+        "mean_forward_3m": 0.028184381434820653,
+        "mean_forward_6m": 0.05699224383618581,
+        "median_forward_6m": 0.06417614966289209,
+        "mean_min_forward_6m": -0.029995948030239344
+      },
+      "by_count": {
+        "0": {
+          "months": 236,
+          "event_months": 22,
+          "event_rate": 0.09322033898305085,
+          "positive_forward_6m_months": 176,
+          "mean_forward_1m": 0.009363135593220343,
+          "mean_forward_3m": 0.027037133975254243,
+          "mean_forward_6m": 0.05782514031739284,
+          "median_forward_6m": 0.072016341253336,
+          "mean_min_forward_6m": -0.030822438478252764
+        },
+        "1": {
+          "months": 132,
+          "event_months": 14,
+          "event_rate": 0.10606060606060606,
+          "positive_forward_6m_months": 99,
+          "mean_forward_1m": 0.00998560606060606,
+          "mean_forward_3m": 0.030235520832227268,
+          "mean_forward_6m": 0.05550312588493689,
+          "median_forward_6m": 0.060553728001170426,
+          "mean_min_forward_6m": -0.028518283289851714
+        },
+        "2": {
+          "months": 44,
+          "event_months": 3,
+          "event_rate": 0.06818181818181818,
+          "positive_forward_6m_months": 32,
+          "mean_forward_1m": 0.009649999999999999,
+          "mean_forward_3m": 0.03510196454656816,
+          "mean_forward_6m": 0.07069378868299973,
+          "median_forward_6m": 0.08757422653314484,
+          "mean_min_forward_6m": -0.021529754989104553
+        },
+        "3": {
+          "months": 14,
+          "event_months": 0,
+          "event_rate": 0.0,
+          "positive_forward_6m_months": 14,
+          "mean_forward_1m": 0.013671428571428541,
+          "mean_forward_3m": 0.04656189745942848,
+          "mean_forward_6m": 0.10443696462740733,
+          "median_forward_6m": 0.12147598891968103,
+          "mean_min_forward_6m": -0.01005387515641055
+        },
+        "4": {
+          "months": 0
+        }
+      }
+    },
+    "train": {
+      "baseline": {
+        "months": 258,
+        "event_months": 33,
+        "event_rate": 0.12790697674418605,
+        "positive_forward_6m_months": 181,
+        "mean_forward_1m": 0.00833100775193798,
+        "mean_forward_3m": 0.02464761357010076,
+        "mean_forward_6m": 0.05012677622306497,
+        "median_forward_6m": 0.061491689797489424,
+        "mean_min_forward_6m": -0.035313564342351195
+      },
+      "caution_ge2": {
+        "months": 30,
+        "event_months": 3,
+        "event_rate": 0.1,
+        "positive_forward_6m_months": 21,
+        "mean_forward_1m": 0.008426666666666667,
+        "mean_forward_3m": 0.03612483731303331,
+        "mean_forward_6m": 0.06225797247927358,
+        "median_forward_6m": 0.08757422653314484,
+        "mean_min_forward_6m": -0.02127341789411085
+      },
+      "not_caution_lt2": {
+        "months": 228,
+        "event_months": 30,
+        "event_rate": 0.13157894736842105,
+        "positive_forward_6m_months": 160,
+        "mean_forward_1m": 0.008318421052631574,
+        "mean_forward_3m": 0.023137452551293843,
+        "mean_forward_6m": 0.04853056618935331,
+        "median_forward_6m": 0.058252686287351474,
+        "mean_min_forward_6m": -0.037160952032909124
+      },
+      "by_count": {
+        "0": {
+          "months": 139,
+          "event_months": 19,
+          "event_rate": 0.1366906474820144,
+          "positive_forward_6m_months": 93,
+          "mean_forward_1m": 0.008857553956834529,
+          "mean_forward_3m": 0.023509258056424447,
+          "mean_forward_6m": 0.04594273690159684,
+          "median_forward_6m": 0.050995281054563746,
+          "mean_min_forward_6m": -0.04134889054618423
+        },
+        "1": {
+          "months": 89,
+          "event_months": 11,
+          "event_rate": 0.12359550561797752,
+          "positive_forward_6m_months": 67,
+          "mean_forward_1m": 0.007476404494382016,
+          "mean_forward_3m": 0.022556767548898862,
+          "mean_forward_6m": 0.05257223215562462,
+          "median_forward_6m": 0.06222392569437596,
+          "mean_min_forward_6m": -0.03062023907397387
+        },
+        "2": {
+          "months": 30,
+          "event_months": 3,
+          "event_rate": 0.1,
+          "positive_forward_6m_months": 21,
+          "mean_forward_1m": 0.008426666666666667,
+          "mean_forward_3m": 0.03612483731303331,
+          "mean_forward_6m": 0.06225797247927358,
+          "median_forward_6m": 0.08757422653314484,
+          "mean_min_forward_6m": -0.02127341789411085
+        },
+        "3": {
+          "months": 0
+        },
+        "4": {
+          "months": 0
+        }
+      }
+    },
+    "holdout": {
+      "baseline": {
+        "months": 162,
+        "event_months": 6,
+        "event_rate": 0.037037037037037035,
+        "positive_forward_6m_months": 134,
+        "mean_forward_1m": 0.012105555555555562,
+        "mean_forward_3m": 0.035832331936919766,
+        "mean_forward_6m": 0.07352864634972191,
+        "median_forward_6m": 0.07637892697514903,
+        "mean_min_forward_6m": -0.018362203311801356
+      },
+      "caution_ge2": {
+        "months": 28,
+        "event_months": 0,
+        "event_rate": 0.0,
+        "positive_forward_6m_months": 25,
+        "mean_forward_1m": 0.012971428571428554,
+        "mean_forward_3m": 0.039735995896071366,
+        "mean_forward_6m": 0.09660375115919582,
+        "median_forward_6m": 0.09932151907234577,
+        "mean_min_forward_6m": -0.016066461960250803
+      },
+      "not_caution_lt2": {
+        "months": 134,
+        "event_months": 6,
+        "event_rate": 0.04477611940298507,
+        "positive_forward_6m_months": 109,
+        "mean_forward_1m": 0.011924626865671653,
+        "mean_forward_3m": 0.03501664096038062,
+        "mean_forward_6m": 0.06870698265819006,
+        "median_forward_6m": 0.0753006712966392,
+        "mean_min_forward_6m": -0.01884191045988655
+      },
+      "by_count": {
+        "0": {
+          "months": 95,
+          "event_months": 3,
+          "event_rate": 0.031578947368421054,
+          "positive_forward_6m_months": 81,
+          "mean_forward_1m": 0.0117242105263158,
+          "mean_forward_3m": 0.03283317206325267,
+          "mean_forward_6m": 0.07479192270808226,
+          "median_forward_6m": 0.07784291677548305,
+          "mean_min_forward_6m": -0.01389483994682153
+        },
+        "1": {
+          "months": 39,
+          "event_months": 3,
+          "event_rate": 0.07692307692307693,
+          "positive_forward_6m_months": 28,
+          "mean_forward_1m": 0.01241282051282052,
+          "mean_forward_3m": 0.0403353472482564,
+          "mean_forward_6m": 0.05388469279306806,
+          "median_forward_6m": 0.035484747832684516,
+          "mean_min_forward_6m": -0.03089246683786542
+        },
+        "2": {
+          "months": 14,
+          "event_months": 0,
+          "event_rate": 0.0,
+          "positive_forward_6m_months": 11,
+          "mean_forward_1m": 0.012271428571428569,
+          "mean_forward_3m": 0.03291009433271425,
+          "mean_forward_6m": 0.0887705376909843,
+          "median_forward_6m": 0.08250812890809767,
+          "mean_min_forward_6m": -0.022079048764091058
+        },
+        "3": {
+          "months": 14,
+          "event_months": 0,
+          "event_rate": 0.0,
+          "positive_forward_6m_months": 14,
+          "mean_forward_1m": 0.013671428571428541,
+          "mean_forward_3m": 0.04656189745942848,
+          "mean_forward_6m": 0.10443696462740733,
+          "median_forward_6m": 0.12147598891968103,
+          "mean_min_forward_6m": -0.01005387515641055
+        },
+        "4": {
+          "months": 0
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "date": "1999-12",
+      "input_observation_month": "1999-11",
+      "sample": "training; descriptive only",
+      "core_cpi_3m": 2.5048602216675597,
+      "ff_change_12m": 0.5899999999999999,
+      "curve_10y_3m": 0.96,
+      "credit_change_3m": 0.040000000000000036,
+      "credit_level": 0.79,
+      "fedfunds_level": 5.42,
+      "core_cpi_yoy": 2.0594965675057253,
+      "headline_cpi_yoy": 2.6203534430225606,
+      "curve_flag": false,
+      "core_flag": false,
+      "fed_flag": false,
+      "credit_flag": false,
+      "flag_count": 0,
+      "forward_1m": -0.043300000000000005,
+      "forward_3m": 0.04025963218399986,
+      "forward_6m": -0.011716530563160465,
+      "min_forward_6m": -0.059494223984735806,
+      "event": 0.0,
+      "model_score": 0.07724650033160274,
+      "monthly_future_path": [
+        0.0,
+        -0.043300000000000005,
+        -0.015651370000000053,
+        0.04025963218399986,
+        -0.021427764004511296,
+        -0.059494223984735806,
+        -0.011716530563160465
+      ],
+      "nasdaq_price_only": {
+        "monthly_future_path": [
+          0.0,
+          -0.031690876340214946,
+          0.15417355767931173,
+          0.12373596506533069,
+          -0.05127404891738385,
+          -0.16425389070874408,
+          -0.025360564813199038
+        ],
+        "forward_1m": -0.031690876340214946,
+        "forward_3m": 0.12373596506533069,
+        "forward_6m": -0.025360564813199038,
+        "min_forward_6m": -0.16425389070874408
+      }
+    },
+    {
+      "date": "2000-02",
+      "input_observation_month": "2000-01",
+      "sample": "training; descriptive only",
+      "core_cpi_3m": 2.7224763325599532,
+      "ff_change_12m": 0.8200000000000003,
+      "curve_10y_3m": 1.3399999999999999,
+      "credit_change_3m": -0.28000000000000114,
+      "credit_level": 0.5499999999999998,
+      "fedfunds_level": 5.45,
+      "core_cpi_yoy": 2.1070615034168627,
+      "headline_cpi_yoy": 2.792956891317555,
+      "curve_flag": false,
+      "core_flag": false,
+      "fed_flag": false,
+      "credit_flag": false,
+      "flag_count": 0,
+      "forward_1m": 0.05679999999999996,
+      "forward_3m": -0.044539965464000075,
+      "forward_6m": 0.05800644065682792,
+      "min_forward_6m": -0.044539965464000075,
+      "event": 0.0,
+      "model_score": 0.04452566230160844,
+      "monthly_future_path": [
+        0.0,
+        0.05679999999999996,
+        -0.00586824000000008,
+        -0.044539965464000075,
+        0.003997404290428719,
+        -0.016082543795379878,
+        0.05800644065682792
+      ],
+      "nasdaq_price_only": {
+        "monthly_future_path": [
+          0.0,
+          -0.026371763944394777,
+          -0.17800408372705023,
+          -0.27589217086927176,
+          -0.1555521015864364,
+          -0.19794791651141552,
+          -0.1044011846640931
+        ],
+        "forward_1m": -0.026371763944394777,
+        "forward_3m": -0.27589217086927176,
+        "forward_6m": -0.1044011846640931,
+        "min_forward_6m": -0.27589217086927176
+      }
+    },
+    {
+      "date": "2007-09",
+      "input_observation_month": "2007-08",
+      "sample": "training; descriptive only",
+      "core_cpi_3m": 2.0357534528339105,
+      "ff_change_12m": -0.23000000000000043,
+      "curve_10y_3m": 0.46999999999999975,
+      "credit_change_3m": -0.05999999999999961,
+      "credit_level": 0.8600000000000003,
+      "fedfunds_level": 5.02,
+      "core_cpi_yoy": 2.0884912959380886,
+      "headline_cpi_yoy": 1.897448478900876,
+      "curve_flag": false,
+      "core_flag": false,
+      "fed_flag": false,
+      "credit_flag": false,
+      "flag_count": 0,
+      "forward_1m": 0.021099999999999897,
+      "forward_3m": -0.030294413640000184,
+      "forward_6m": -0.12338931961108912,
+      "min_forward_6m": -0.12338931961108912,
+      "event": 0.0,
+      "model_score": 0.15417896208744716,
+      "monthly_future_path": [
+        0.0,
+        0.021099999999999897,
+        -0.024441060000000125,
+        -0.030294413640000184,
+        -0.08964039552523217,
+        -0.11658703981768526,
+        -0.12338931961108912
+      ],
+      "nasdaq_price_only": {
+        "monthly_future_path": [
+          0.0,
+          0.05834536368684051,
+          -0.015006477882657854,
+          -0.018219507680917957,
+          -0.11535813436979458,
+          -0.15917823431426992,
+          -0.15635757912270976
+        ],
+        "forward_1m": 0.05834536368684051,
+        "forward_3m": -0.018219507680917957,
+        "forward_6m": -0.15635757912270976,
+        "min_forward_6m": -0.15917823431426992
+      }
+    },
+    {
+      "date": "2017-12",
+      "input_observation_month": "2017-11",
+      "sample": "holdout",
+      "core_cpi_3m": 2.044516499020821,
+      "ff_change_12m": 0.75,
+      "curve_10y_3m": 1.12,
+      "credit_change_3m": 0.020000000000000018,
+      "credit_level": 0.6999999999999997,
+      "fedfunds_level": 1.16,
+      "core_cpi_yoy": 1.7376072726981162,
+      "headline_cpi_yoy": 2.172493864295566,
+      "curve_flag": false,
+      "core_flag": false,
+      "fed_flag": false,
+      "credit_flag": false,
+      "flag_count": 0,
+      "forward_1m": 0.05689999999999995,
+      "forward_3m": -0.0031454588889999746,
+      "forward_6m": 0.03545050924990911,
+      "min_forward_6m": -0.0031454588889999746,
+      "event": 0.0,
+      "model_score": 0.0695345349983338,
+      "monthly_future_path": [
+        0.0,
+        0.05689999999999995,
+        0.019591429999999965,
+        -0.0031454588889999746,
+        0.0009416447295551578,
+        0.028968010781982745,
+        0.03545050924990911
+      ],
+      "nasdaq_price_only": {
+        "monthly_future_path": [
+          0.0,
+          0.07360007184875816,
+          0.05354181061768193,
+          0.023184261645365467,
+          0.023594205165867743,
+          0.0780384709541253,
+          0.08791477810177306
+        ],
+        "forward_1m": 0.07360007184875816,
+        "forward_3m": 0.023184261645365467,
+        "forward_6m": 0.08791477810177306,
+        "min_forward_6m": 0.023184261645365467
+      }
+    },
+    {
+      "date": "2020-01",
+      "input_observation_month": "2019-12",
+      "sample": "holdout",
+      "core_cpi_3m": 2.492054347720485,
+      "ff_change_12m": -0.72,
+      "curve_10y_3m": 0.32000000000000006,
+      "credit_change_3m": -0.010000000000000231,
+      "credit_level": 0.8700000000000001,
+      "fedfunds_level": 1.55,
+      "core_cpi_yoy": 2.2905988164406255,
+      "headline_cpi_yoy": 2.3195274699624457,
+      "curve_flag": false,
+      "core_flag": false,
+      "fed_flag": false,
+      "credit_flag": false,
+      "flag_count": 0,
+      "forward_1m": -0.08030000000000004,
+      "forward_3m": -0.09365404399999999,
+      "forward_6m": 0.03771917498891231,
+      "min_forward_6m": -0.20216025000000004,
+      "event": 1.0,
+      "model_score": 0.20600589703302277,
+      "monthly_future_path": [
+        0.0,
+        -0.08030000000000004,
+        -0.20216025000000004,
+        -0.09365404399999999,
+        -0.04307993965519996,
+        -0.019539706170717874,
+        0.03771917498891231
+      ],
+      "nasdaq_price_only": {
+        "monthly_future_path": [
+          0.0,
+          -0.06377159067811611,
+          -0.15854546090347,
+          -0.028564278642412733,
+          0.03703772508616621,
+          0.09920620176725037,
+          0.17422581723844788
+        ],
+        "forward_1m": -0.06377159067811611,
+        "forward_3m": -0.028564278642412733,
+        "forward_6m": 0.17422581723844788,
+        "min_forward_6m": -0.15854546090347
+      }
+    },
+    {
+      "date": "2021-12",
+      "input_observation_month": "2021-11",
+      "sample": "holdout",
+      "core_cpi_3m": 6.4726413880267675,
+      "ff_change_12m": -0.009999999999999995,
+      "curve_10y_3m": 1.51,
+      "credit_change_3m": -0.030000000000000693,
+      "credit_level": 0.6599999999999997,
+      "fedfunds_level": 0.08,
+      "core_cpi_yoy": 4.972572143965692,
+      "headline_cpi_yoy": 6.901970403700863,
+      "curve_flag": false,
+      "core_flag": true,
+      "fed_flag": false,
+      "credit_flag": false,
+      "flag_count": 1,
+      "forward_1m": -0.06159999999999999,
+      "forward_3m": -0.05475178201600006,
+      "forward_6m": -0.21754823263114886,
+      "min_forward_6m": -0.21754823263114886,
+      "event": 1.0,
+      "model_score": 0.045238065203223876,
+      "monthly_future_path": [
+        0.0,
+        -0.06159999999999999,
+        -0.08299551999999999,
+        -0.05475178201600006,
+        -0.14369963932829444,
+        -0.14635417044637666,
+        -0.21754823263114886
+      ],
+      "nasdaq_price_only": {
+        "monthly_future_path": [
+          0.0,
+          -0.08981097438985186,
+          -0.12103378913478269,
+          -0.09104843281898267,
+          -0.21159069017070664,
+          -0.22777800149185334,
+          -0.2950616076604813
+        ],
+        "forward_1m": -0.08981097438985186,
+        "forward_3m": -0.09104843281898267,
+        "forward_6m": -0.2950616076604813,
+        "min_forward_6m": -0.2950616076604813
+      }
+    }
+  ],
+  "worst_observed_forward_window": {
+    "selection": "Lowest min_forward_6m in the fixed full monthly sample; retrospective outcome selection, not a causal worst environment",
+    "date": "2008-08",
+    "input_observation_month": "2008-07",
+    "sample": "training; descriptive only",
+    "core_cpi_3m": 2.645154465740407,
+    "ff_change_12m": -3.25,
+    "curve_10y_3m": 2.38,
+    "credit_change_3m": 0.07000000000000028,
+    "credit_level": 1.4900000000000002,
+    "fedfunds_level": 2.01,
+    "core_cpi_yoy": 2.463313612274831,
+    "headline_cpi_yoy": 5.497512078341837,
+    "curve_flag": false,
+    "core_flag": false,
+    "fed_flag": false,
+    "credit_flag": false,
+    "flag_count": 0,
+    "forward_1m": -0.09199999999999997,
+    "forward_3m": -0.30547123584,
+    "forward_6m": -0.4161685053159574,
+    "min_forward_6m": -0.4161685053159574,
+    "event": 1.0,
+    "model_score": 0.37136552376135235,
+    "monthly_future_path": [
+      0.0,
+      -0.09199999999999997,
+      -0.24744960000000005,
+      -0.30547123584,
+      -0.293178076714368,
+      -0.35035997030817567,
+      -0.4161685053159574
+    ],
+    "nasdaq_price_only": {
+      "monthly_future_path": [
+        0.0,
+        -0.11642562681624646,
+        -0.2731001216462796,
+        -0.3514014665134825,
+        -0.3338894708386835,
+        -0.37638541596269504,
+        -0.4180239237683314
+      ],
+      "forward_1m": -0.11642562681624646,
+      "forward_3m": -0.3514014665134825,
+      "forward_6m": -0.4180239237683314,
+      "min_forward_6m": -0.4180239237683314
+    }
+  },
+  "false_positive_selection": "First three chronological holdout starts of >=2-flag episodes with no target event and positive six-month return",
+  "false_positive_examples": [],
+  "non_event_caution_episode_selection": "First three chronological holdout starts of >=2-flag episodes with no target event, without requiring positive return. Added as descriptive fallback because the originally specified positive-return episode selection is empty; model and thresholds unchanged.",
+  "non_event_caution_episode_examples": [
+    {
+      "date": "2022-05",
+      "input_observation_month": "2022-04",
+      "sample": "holdout",
+      "core_cpi_3m": 5.344569185870474,
+      "ff_change_12m": 0.26,
+      "curve_10y_3m": 1.99,
+      "credit_change_3m": 0.25000000000000044,
+      "credit_level": 0.9000000000000004,
+      "fedfunds_level": 0.33,
+      "core_cpi_yoy": 6.158737119052837,
+      "headline_cpi_yoy": 8.231750770777225,
+      "curve_flag": false,
+      "core_flag": true,
+      "fed_flag": false,
+      "credit_flag": true,
+      "flag_count": 2,
+      "forward_1m": -0.08340000000000003,
+      "forward_3m": -0.030928958020000064,
+      "forward_6m": -0.0014566043740720236,
+      "min_forward_6m": -0.11959895836117007,
+      "event": 0.0,
+      "model_score": 0.0451241638236942,
+      "monthly_future_path": [
+        0.0,
+        -0.08340000000000003,
+        0.005051899999999998,
+        -0.030928958020000064,
+        -0.11959895836117007,
+        -0.048462554196752605,
+        -0.0014566043740720236
+      ],
+      "nasdaq_price_only": {
+        "monthly_future_path": [
+          0.0,
+          -0.0871298749564412,
+          0.025601358784047346,
+          -0.021950288832658926,
+          -0.12463549310137312,
+          -0.09048958770472604,
+          -0.050771475798728316
+        ],
+        "forward_1m": -0.0871298749564412,
+        "forward_3m": -0.021950288832658926,
+        "forward_6m": -0.050771475798728316,
+        "min_forward_6m": -0.12463549310137312
+      }
+    },
+    {
+      "date": "2024-11",
+      "input_observation_month": "2024-10",
+      "sample": "holdout",
+      "core_cpi_3m": 3.5465600807173647,
+      "ff_change_12m": -0.5,
+      "curve_10y_3m": -0.41000000000000014,
+      "credit_change_3m": -0.040000000000000036,
+      "credit_level": 0.6799999999999997,
+      "fedfunds_level": 4.83,
+      "core_cpi_yoy": 3.298689706765301,
+      "headline_cpi_yoy": 2.578844053871343,
+      "curve_flag": true,
+      "core_flag": true,
+      "fed_flag": false,
+      "credit_flag": false,
+      "flag_count": 2,
+      "forward_1m": -0.028000000000000025,
+      "forward_3m": -0.018346941639999947,
+      "forward_6m": -0.023153329622722207,
+      "min_forward_6m": -0.08225604060759317,
+      "event": 0.0,
+      "model_score": 0.2015222049766313,
+      "monthly_future_path": [
+        0.0,
+        -0.028000000000000025,
+        0.002812400000000048,
+        -0.018346941639999947,
+        -0.07773695167077999,
+        -0.08225604060759317,
+        -0.023153329622722207
+      ],
+      "nasdaq_price_only": {
+        "monthly_future_path": [
+          0.0,
+          0.004819397476450771,
+          0.021295992282303722,
+          -0.019298923882971164,
+          -0.09984717587574665,
+          -0.09219556284495356,
+          -0.005432359064364678
+        ],
+        "forward_1m": 0.004819397476450771,
+        "forward_3m": -0.019298923882971164,
+        "forward_6m": -0.005432359064364678,
+        "min_forward_6m": -0.09984717587574665
+      }
+    }
+  ],
+  "missed_target_selection": "First month of each consecutive holdout run with event=1 but <2 flags",
+  "missed_target_examples": [
+    {
+      "date": "2019-11",
+      "input_observation_month": "2019-10",
+      "sample": "holdout",
+      "core_cpi_3m": 2.59243689748192,
+      "ff_change_12m": -0.3599999999999999,
+      "curve_10y_3m": 0.06000000000000005,
+      "credit_change_3m": -0.08000000000000007,
+      "credit_level": 0.9100000000000001,
+      "fedfunds_level": 1.83,
+      "core_cpi_yoy": 2.3378148209658223,
+      "headline_cpi_yoy": 1.7339736996186295,
+      "curve_flag": false,
+      "core_flag": false,
+      "fed_flag": false,
+      "credit_flag": false,
+      "flag_count": 0,
+      "forward_1m": 0.029099999999999904,
+      "forward_3m": -0.053347437346000226,
+      "forward_6m": -0.015036612612346345,
+      "min_forward_6m": -0.17877890189765522,
+      "event": 1.0,
+      "model_score": 0.17607033159690863,
+      "monthly_future_path": [
+        0.0,
+        0.029099999999999904,
+        0.029305819999999816,
+        -0.053347437346000226,
+        -0.17877890189765522,
+        -0.06709283255573628,
+        -0.015036612612346345
+      ],
+      "nasdaq_price_only": {
+        "monthly_future_path": [
+          0.0,
+          0.03544297077942704,
+          0.056023504783930145,
+          -0.011320793909620264,
+          -0.11140422850693588,
+          0.02585895514034453,
+          0.09513621303864683
+        ],
+        "forward_1m": 0.03544297077942704,
+        "forward_3m": -0.011320793909620264,
+        "forward_6m": 0.09513621303864683,
+        "min_forward_6m": -0.11140422850693588
+      }
+    },
+    {
+      "date": "2021-12",
+      "input_observation_month": "2021-11",
+      "sample": "holdout",
+      "core_cpi_3m": 6.4726413880267675,
+      "ff_change_12m": -0.009999999999999995,
+      "curve_10y_3m": 1.51,
+      "credit_change_3m": -0.030000000000000693,
+      "credit_level": 0.6599999999999997,
+      "fedfunds_level": 0.08,
+      "core_cpi_yoy": 4.972572143965692,
+      "headline_cpi_yoy": 6.901970403700863,
+      "curve_flag": false,
+      "core_flag": true,
+      "fed_flag": false,
+      "credit_flag": false,
+      "flag_count": 1,
+      "forward_1m": -0.06159999999999999,
+      "forward_3m": -0.05475178201600006,
+      "forward_6m": -0.21754823263114886,
+      "min_forward_6m": -0.21754823263114886,
+      "event": 1.0,
+      "model_score": 0.045238065203223876,
+      "monthly_future_path": [
+        0.0,
+        -0.06159999999999999,
+        -0.08299551999999999,
+        -0.05475178201600006,
+        -0.14369963932829444,
+        -0.14635417044637666,
+        -0.21754823263114886
+      ],
+      "nasdaq_price_only": {
+        "monthly_future_path": [
+          0.0,
+          -0.08981097438985186,
+          -0.12103378913478269,
+          -0.09104843281898267,
+          -0.21159069017070664,
+          -0.22777800149185334,
+          -0.2950616076604813
+        ],
+        "forward_1m": -0.08981097438985186,
+        "forward_3m": -0.09104843281898267,
+        "forward_6m": -0.2950616076604813,
+        "min_forward_6m": -0.2950616076604813
+      }
+    },
+    {
+      "date": "2022-03",
+      "input_observation_month": "2022-02",
+      "sample": "holdout",
+      "core_cpi_3m": 7.048283800957744,
+      "ff_change_12m": 0.0,
+      "curve_10y_3m": 1.5999999999999999,
+      "credit_change_3m": 0.0600000000000005,
+      "credit_level": 0.7200000000000002,
+      "fedfunds_level": 0.08,
+      "core_cpi_yoy": 6.4551151617656455,
+      "headline_cpi_yoy": 7.937278766517819,
+      "curve_flag": false,
+      "core_flag": true,
+      "fed_flag": false,
+      "credit_flag": false,
+      "flag_count": 1,
+      "forward_1m": -0.09409999999999996,
+      "forward_3m": -0.17222613861400005,
+      "forward_6m": -0.20491711782060795,
+      "min_forward_6m": -0.20491711782060795,
+      "event": 1.0,
+      "model_score": 0.041837033551991996,
+      "monthly_future_path": [
+        0.0,
+        -0.09409999999999996,
+        -0.09690829000000001,
+        -0.17222613861400005,
+        -0.09234596099025105,
+        -0.12483997558680016,
+        -0.20491711782060795
+      ],
+      "nasdaq_price_only": {
+        "monthly_future_path": [
+          0.0,
+          -0.1326168100744558,
+          -0.15042558218686797,
+          -0.2244488949771175,
+          -0.12867532270268578,
+          -0.16907398604270418,
+          -0.2563127086773196
+        ],
+        "forward_1m": -0.1326168100744558,
+        "forward_3m": -0.2244488949771175,
+        "forward_6m": -0.2563127086773196,
+        "min_forward_6m": -0.2563127086773196
+      }
+    }
+  ],
+  "data_checks": {
+    "all_required_predictor_observations_present": true,
+    "missing_values_interpolated": false,
+    "all_target_windows_have_six_months": true,
+    "train_standardization_only": true,
+    "input_missing_not_used": "2025-10 CPI is missing; no interpolation; final signal 2025-06 only requires inputs through 2025-05",
+    "holdout_event_cluster_warning": "Three consecutive positive-label runs, mostly two underlying selloff periods (COVID and 2022); not six independent crises"
+  },
+  "limitations": [
+    "Current revised-vintage inputs and current French research returns; this is not a historical point-in-time backtest.",
+    "All inputs lagged one month as a conservative publication proxy; actual release calendars/vintages were not reconstructed.",
+    "Monthly targets overlap. Event months and caution months are not independent observations; apparent sample size overstates independent crises.",
+    "Broad US market returns do not measure Nasdaq's concentrated dot-com losses.",
+    "Minimum future month-end loss relative to signal date is not daily maximum drawdown and can miss a large drop from an intervening peak.",
+    "Four macro variables omit valuation, leverage, equity concentration, earnings revisions and exogenous shocks; COVID is a likely miss.",
+    "BAA minus AAA is a yield-difference proxy affected by maturity, composition and liquidity, not an option-adjusted credit spread.",
+    "GS10 minus discount-basis TB3MS is a familiar macro slope proxy, not a perfectly convention-matched traded curve.",
+    "French changed from FIZ to CIZ starting with the January 2025 release, changing dividend reinvestment convention and revising historical files.",
+    "Observational regression is not a causal estimate. Historical similarity does not identify a crash probability.",
+    "A single fixed split gives limited evidence; thresholds and penalty were not optimized. No claim of calibrated live probabilities or validated alpha.",
+    "No 2026 model inference is produced from the snapshot because its daily mixed-frequency observations are incompatible with these lagged monthly inputs."
+  ]
+}

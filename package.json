@@ -1,0 +1,11 @@
+{
+  "name": "polo-market-notes",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Polo’s market notes · Polo 的市场解读 — personal US macro and market research notes.",
+  "scripts": {
+    "dev": "python3 -m http.server 4174 --bind 127.0.0.1",
+    "check": "node --check app.js && node --check outlook.js && node --check forecast-data.js"
+  }
+}

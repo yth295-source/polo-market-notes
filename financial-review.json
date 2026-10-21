@@ -1,0 +1,836 @@
+{
+  "id": "financial-fact-and-arithmetic-review-20261018",
+  "status": "PASS_WITH_EXPLICIT_UNKNOWN_AND_INTERPRETATION_LIMITS",
+  "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+  "scope": "Current public-source financial observations, arithmetic and interpretation review; read-only reconciliation of stored Stage3 historical results. No newly fitted model, no new historical signal run, no prospective forecast or outcome evaluation.",
+  "metrics": [
+    {
+      "id": "cpi-headline-yoy",
+      "label": "整体 CPI 同比",
+      "value": "3.7",
+      "unit": "%",
+      "period": "2026 年 9 月",
+      "releasedAt": "2026-10-14",
+      "note": "同比使用非季调指数。汽油解释超过一半的当月季调涨幅；同比与月环比描述不同时间窗口。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "sp500-week",
+      "label": "标普 500 当周表现",
+      "value": "−1.95",
+      "unit": "%",
+      "period": "2026-10-09 至 2026-10-16 美国收盘",
+      "releasedAt": "2026-10-16",
+      "note": "价格指数周回报：100 × (7,659.44 ÷ 7,811.54 − 1) = −1.9471%；观察端点2026-10-16与10-09，不含分红。FRED当前版本核对，非当时收取凭证。",
+      "verificationStatus": "VERIFIED_PRIMARY_AND_RECALCULATED",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "sourceIds": [
+        "fred-sp500"
+      ]
+    },
+    {
+      "id": "cpi-headline",
+      "label": "整体 CPI 月环比",
+      "value": "0.6",
+      "unit": "%",
+      "period": "2026 年 9 月",
+      "releasedAt": "2026-10-14",
+      "note": "汽油解释超过一半的整体月度涨幅。环比采用季调口径，同比采用非季调口径。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "cpi-core",
+      "label": "核心 CPI 月环比",
+      "value": "0.3",
+      "unit": "%",
+      "period": "2026 年 9 月",
+      "releasedAt": "2026-10-14",
+      "note": "剔除食品与能源。近期核心动量高于同比显示的速度，仍需细项广度验证。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "cpi-core-3m",
+      "label": "核心 CPI 三个月年化",
+      "value": "3.41",
+      "unit": "%",
+      "period": "截至 2026 年 9 月的三个月",
+      "releasedAt": "2026-10-14",
+      "note": "同一次读取的季调指数：100 × [(338.896 ÷ 336.065)^4 − 1] = 3.4124%，四舍五入为3.41%。观察端点2026-09与2026-06；不是未来预测。",
+      "verificationStatus": "VERIFIED_PRIMARY_AND_RECALCULATED",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "pce-core",
+      "label": "核心 PCE 月环比",
+      "value": "0.2",
+      "unit": "%",
+      "period": "2026 年 8 月",
+      "releasedAt": "2026-09-30",
+      "note": "比最新 CPI 落后一个月。Fed 的长期目标针对整体 PCE；核心 PCE 用于观察趋势。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "pce-core-3m",
+      "label": "核心 PCE 三个月年化",
+      "value": "2.05",
+      "unit": "%",
+      "period": "截至 2026 年 8 月的三个月",
+      "releasedAt": "2026-09-30",
+      "note": "同一次读取、年度更新后的季调指数：100 × [(130.455 ÷ 129.796)^4 − 1] = 2.0464%，四舍五入为2.05%。观察端点2026-08与2026-05；9月尚未公布。",
+      "verificationStatus": "VERIFIED_PRIMARY_AND_RECALCULATED",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "cpi-gasoline",
+      "label": "CPI 汽油月环比",
+      "value": "9.1",
+      "unit": "%",
+      "period": "2026 年 9 月",
+      "releasedAt": "2026-10-14",
+      "note": "这是一项零售价格变化，不能等同于原油涨幅；也不能据此直接判断长期通胀。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "retail-gasoline",
+      "label": "美国零售汽油 · 全品级",
+      "value": "4.471",
+      "unit": "美元 / 加仑",
+      "period": "2026-10-12 当周",
+      "releasedAt": "2026-10-14",
+      "note": "EIA全品级、含税每加仑价格，10/12观察4.471，10/14发布；9/21为4.610。不要混用普通汽油4.331。周价不是完整月均，不能直接推算季调CPI。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "ppi-underlying",
+      "label": "PPI 剔除食品、能源与贸易服务",
+      "value": "0.5",
+      "unit": "% 月环比",
+      "period": "2026 年 9 月",
+      "releasedAt": "2026-10-15",
+      "note": "生产者端最终需求售价压力值得观察；这不是纯投入成本指标。库存、需求与企业毛利会改变传导，不能把 PPI 等量映射成 CPI。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "fed-range",
+      "label": "Fed 目标利率区间",
+      "value": "3.75–4.00",
+      "unit": "%",
+      "period": "2026-09-16 决议后",
+      "releasedAt": "2026-09-16",
+      "note": "9/16声明宣布加息25bp，实施指令自9/17起。目标区间不同于实际隔夜利率、下一次会议概率或可观测中性利率；仅凭名义区间不能证明强限制性。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "fed-hike",
+      "label": "9 月政策调整",
+      "value": "+25",
+      "unit": "bp",
+      "period": "2026-09-16",
+      "releasedAt": "2026-09-16",
+      "note": "9/16决议+25bp；10/7公布的9月纪要：多数参与者当时认为年内可能还需一次加息，但每次会议取决于新信息。不是10月必加息，也不是市场概率。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "payroll",
+      "label": "非农就业新增",
+      "value": "2.9",
+      "unit": "万人",
+      "period": "2026 年 9 月",
+      "releasedAt": "2026-10-02",
+      "note": "招聘偏弱。需要与工时、失业率及裁员数据合看，单月就业不等同于衰退。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "unemployment",
+      "label": "失业率",
+      "value": "4.2",
+      "unit": "%",
+      "period": "2026 年 9 月",
+      "releasedAt": "2026-10-02",
+      "note": "目前没有突然失速的确认。变化可能来自劳动供给，也可能来自需求，需要拆开分析。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "claims",
+      "label": "初领失业救济",
+      "value": "19.9",
+      "unit": "万人",
+      "period": "截至 2026-10-10 一周",
+      "releasedAt": "2026-10-15",
+      "note": "没有广泛裁员激增的确认。周度数值易受季节与事件影响，持续变化比单周更重要。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "ust-2y",
+      "label": "2 年期国债收益率",
+      "value": "4.74",
+      "unit": "%",
+      "period": "2026-10-16 美国交易日",
+      "releasedAt": "2026-10-16",
+      "note": "反映未来短率预期及风险补偿等因素，不能直接换算成每次 FOMC 的加息概率。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "ust-10y",
+      "label": "10 年期国债收益率",
+      "value": "5.09",
+      "unit": "%",
+      "period": "2026-10-16 美国交易日",
+      "releasedAt": "2026-10-16",
+      "note": "水平仍高，最近一周变化则提供边际缓和。水平与变化应分别判断。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "real-10y",
+      "label": "10 年期实际收益率",
+      "value": "2.74",
+      "unit": "%",
+      "period": "2026-10-16 美国交易日",
+      "releasedAt": "2026-10-16",
+      "note": "TIPS 实际收益率是长期实际贴现率代理。本周下跌不支持“实际利率上涨导致股票下跌”的解释。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "breakeven-10y",
+      "label": "10 年期通胀补偿",
+      "value": "2.35",
+      "unit": "%",
+      "period": "2026-10-16 美国交易日",
+      "releasedAt": "2026-10-16",
+      "note": "同日Treasury名义10年5.09%减TIPS实际10年2.74%=2.35%。这是par-yield差的通胀补偿代理，含风险与流动性溢价，不能等同纯预期PCE通胀。",
+      "verificationStatus": "VERIFIED_PRIMARY_AND_RECALCULATED",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "hy-spread",
+      "label": "高收益债信用利差",
+      "value": "323",
+      "unit": "bp",
+      "period": "2026-10-15",
+      "releasedAt": "2026-10-16",
+      "note": "ICE经FRED发布：10/15观察3.23%=323bp，10/16 08:59 CDT更新；9/17为2.70%，扩大53bp。不是10/16收盘值，不等于月度BAA−AAA规则。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "ig-spread",
+      "label": "投资级债信用利差",
+      "value": "84",
+      "unit": "bp",
+      "period": "2026-10-15",
+      "releasedAt": "2026-10-16",
+      "note": "ICE经FRED发布：10/15观察0.84%=84bp，10/16 08:58 CDT更新；9/17为0.78%，扩大6bp。不是企业个别融资报价或10/16收盘值。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "sp500",
+      "label": "标普 500",
+      "value": "7,659.44",
+      "unit": "点",
+      "period": "2026-10-16 收盘",
+      "releasedAt": "2026-10-16",
+      "note": "价格指数收盘，不含分红再投资。这个静态原型没有填充未经核验的每日行情序列。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "nasdaq-week",
+      "label": "纳斯达克当周表现",
+      "value": "UNKNOWN",
+      "unit": "",
+      "period": "截至 2026-10-16 的一周",
+      "releasedAt": "UNKNOWN",
+      "note": "FRED 的纳斯达克综合指数收盘序列目前到 2026-10-15（26,713.030）。Nasdaq GIW 已显示 10/16 候选 Last 26,140.03，但本轮未确认其最终历史收盘状态与准确发布时间，完整周回报仍为 UNKNOWN；不使用 Nasdaq-100 替代。",
+      "verificationStatus": "UNKNOWN_PRIMARY_END_DATE_UNAVAILABLE",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "sourceIds": [
+        "fred-nasdaq",
+        "nasdaq-giw-candidate"
+      ]
+    },
+    {
+      "id": "dow-week",
+      "label": "道指当周表现",
+      "value": "+0.67",
+      "unit": "%",
+      "period": "2026-10-09 至 2026-10-16 美国收盘",
+      "releasedAt": "2026-10-16",
+      "note": "S&P DJI经FRED发布的价格指数：100 × (52,002.41 ÷ 51,654.95 − 1) = +0.6727%。不含分红；不同指数构成不能代替全市场广度。",
+      "verificationStatus": "VERIFIED_PRIMARY_AND_RECALCULATED",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "sourceIds": [
+        "fred-djia"
+      ]
+    },
+    {
+      "id": "forward-pe",
+      "label": "标普 500 未来十二个月 P/E",
+      "value": "19.0",
+      "unit": "倍",
+      "period": "2026-10-16 FactSet 快照",
+      "releasedAt": "2026-10-16",
+      "note": "FactSet 10/16未来12个月预测P/E为19.0倍；10年均值19.1。预测盈利分母可能修订；不能由“接近均值”推出便宜，亦不能拿预测E/P−国债收益率当纯股票风险溢价。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    },
+    {
+      "id": "earnings-growth",
+      "label": "第三季度混合盈利增长",
+      "value": "29.0",
+      "unit": "% 同比",
+      "period": "2026Q3，截至 2026-10-16",
+      "releasedAt": "2026-10-16",
+      "note": "FactSet 10/16混合同比29.0%，只有9%公司已报，其余仍为预测；前周29.4%，季末29.2%。早期样本超预期幅度2.6%与全部公司历史平均7.5%并非同一披露进度样本。公开周报不是历史个股盈利修订数据库。",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00"
+    }
+  ],
+  "sources": [
+    {
+      "id": "bls-cpi",
+      "name": "9 月消费者价格报告",
+      "publisher": "BLS",
+      "url": "https://www.bls.gov/news.release/archives/cpi_10142026.htm",
+      "observedThrough": "2026 年 9 月",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION",
+      "verifiedUrl": "https://www.bls.gov/news.release/archives/cpi_10142026.htm"
+    },
+    {
+      "id": "cpi-series",
+      "name": "核心 CPI 指数",
+      "publisher": "BLS / FRED",
+      "url": "https://fred.stlouisfed.org/data/CPILFESL",
+      "observedThrough": "2026 年 9 月",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "bea-pce",
+      "name": "8 月个人收入与支出",
+      "publisher": "BEA",
+      "url": "https://www.bea.gov/news/2026/personal-income-and-outlays-august-2026",
+      "observedThrough": "2026 年 8 月",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "pce-series",
+      "name": "核心 PCE 价格指数",
+      "publisher": "BEA / FRED",
+      "url": "https://fred.stlouisfed.org/data/PCEPILFE",
+      "observedThrough": "2026 年 8 月",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "bls-ppi",
+      "name": "9 月生产者价格报告",
+      "publisher": "BLS",
+      "url": "https://www.bls.gov/news.release/archives/ppi_10152026.htm",
+      "observedThrough": "2026 年 9 月",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "eia-gas",
+      "name": "美国零售汽油周度价格",
+      "publisher": "EIA",
+      "url": "https://www.eia.gov/dnav/pet/pet_pri_gnd_a_epm0_pte_dpgal_w.htm",
+      "observedThrough": "2026-10-12",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "bls-productivity",
+      "name": "生产率与单位劳动成本",
+      "publisher": "BLS",
+      "url": "https://www.bls.gov/news.release/archives/prod2_09032026.htm",
+      "observedThrough": "2026 年第二季度",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION",
+      "note": "2026-09-03 固定发布档案；第二季度非农商业单位劳动成本同比 1.4%，与季度年化 1.2% 口径不同。"
+    },
+    {
+      "id": "nyfed-sce",
+      "name": "消费者预期调查",
+      "publisher": "New York Fed",
+      "url": "https://www.newyorkfed.org/newsevents/news/research/2026/20261007",
+      "observedThrough": "2026 年 9 月",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "fed-sep-decision",
+      "name": "9 月 FOMC 政策声明",
+      "publisher": "Federal Reserve",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm",
+      "observedThrough": "2026-09-16",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "fed-sep-minutes",
+      "name": "9 月 FOMC 会议纪要",
+      "publisher": "Federal Reserve",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/fomcminutes20260916.pdf",
+      "observedThrough": "2026-09-16 会议",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "bls-jobs",
+      "name": "9 月就业报告",
+      "publisher": "BLS",
+      "url": "https://www.bls.gov/news.release/archives/empsit_10022026.htm",
+      "observedThrough": "2026 年 9 月",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "dol-claims",
+      "name": "10 月 15 日失业救济报告",
+      "publisher": "U.S. Department of Labor",
+      "url": "https://www.dol.gov/sites/dolgov/files/OPA/newsreleases/ui-claims/20261599.pdf",
+      "observedThrough": "截至 2026-10-10 一周",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "treasury-nominal",
+      "name": "10 月国债名义收益率",
+      "publisher": "U.S. Treasury",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_yield_curve",
+      "observedThrough": "2026-10-16",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "treasury-real",
+      "name": "10 月国债实际收益率",
+      "publisher": "U.S. Treasury",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_real_yield_curve",
+      "observedThrough": "2026-10-16",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "treasury-sep-nominal",
+      "name": "9 月国债名义收益率",
+      "publisher": "U.S. Treasury",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+      "observedThrough": "2026-09-16",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "treasury-sep-real",
+      "name": "9 月国债实际收益率",
+      "publisher": "U.S. Treasury",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_real_yield_curve",
+      "observedThrough": "2026-09-16",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "fred-hy",
+      "name": "美国高收益债 OAS",
+      "publisher": "ICE BofA / FRED",
+      "url": "https://fred.stlouisfed.org/data/BAMLH0A0HYM2",
+      "observedThrough": "2026-10-15",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "fred-ig",
+      "name": "美国投资级债 OAS",
+      "publisher": "ICE BofA / FRED",
+      "url": "https://fred.stlouisfed.org/data/BAMLC0A0CM",
+      "observedThrough": "2026-10-15",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "fred-sp500",
+      "name": "标普 500 收盘指数",
+      "publisher": "S&P Dow Jones Indices / FRED",
+      "url": "https://fred.stlouisfed.org/series/SP500",
+      "observedThrough": "2026-10-16",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "ap-week",
+      "name": "美国股市周度表现",
+      "publisher": "Associated Press",
+      "url": "https://apnews.com/article/c27809783ae3230b44c26e5ee4bea056",
+      "observedThrough": "截至 2026-10-16 的一周",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "NOT_REVERIFIED_SECONDARY",
+      "note": "本轮采用一手分发数据核算SP500和DJIA；Nasdaq综合指数全周保留UNKNOWN。"
+    },
+    {
+      "id": "factset",
+      "name": "10 月 16 日盈利季快照",
+      "publisher": "FactSet",
+      "url": "https://insight.factset.com/sp-500-earnings-season-update-october-16-2026",
+      "observedThrough": "2026-10-16",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "fed-calendar",
+      "name": "FOMC 会议日历",
+      "publisher": "Federal Reserve",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "observedThrough": "2026–2027 年会议安排",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "bls-oct-calendar",
+      "name": "10 月数据发布日历",
+      "publisher": "BLS",
+      "url": "https://www.bls.gov/schedule/2026/10_sched.htm",
+      "observedThrough": "2026 年 10 月安排",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "bls-nov-calendar",
+      "name": "11 月数据发布日历",
+      "publisher": "BLS",
+      "url": "https://www.bls.gov/schedule/2026/11_sched.htm",
+      "observedThrough": "2026 年 11 月安排",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "bea-calendar",
+      "name": "BEA 数据发布日历",
+      "publisher": "BEA",
+      "url": "https://www.bea.gov/news/schedule",
+      "observedThrough": "2026 年已公布安排",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "bls-cpi-gap",
+      "name": "2025 年政府停摆对 CPI 的影响",
+      "publisher": "BLS",
+      "url": "https://www.bls.gov/cpi/additional-resources/2025-federal-government-shutdown-impact-cpi-faq.htm",
+      "observedThrough": "2025 年缺失基期及后续影响说明",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationMethod": "manual inspection of source page using web tool on 2026-10-18",
+      "verificationStatus": "VERIFIED_PRIMARY_OR_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "fred-djia",
+      "name": "道琼斯工业指数",
+      "publisher": "S&P Dow Jones Indices / FRED",
+      "url": "https://fred.stlouisfed.org/data/DJIA",
+      "observedThrough": "2026-10-16",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationStatus": "VERIFIED_PROVIDER_DISTRIBUTION"
+    },
+    {
+      "id": "fred-nasdaq",
+      "name": "纳斯达克综合指数",
+      "publisher": "Nasdaq / FRED",
+      "url": "https://fred.stlouisfed.org/series/NASDAQCOM",
+      "observedThrough": "2026-10-15",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationStatus": "VERIFIED_WITH_END_DATE_GAP"
+    },
+    {
+      "id": "eia-release",
+      "name": "汽油与柴油发布日",
+      "publisher": "EIA",
+      "url": "https://www.eia.gov/petroleum/gasdiesel/",
+      "observedThrough": "2026-10-14发布、10/12观察",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationStatus": "VERIFIED_PRIMARY_MANUAL"
+    },
+    {
+      "id": "nasdaq-own-week",
+      "name": "Nasdaq本周市场观察",
+      "publisher": "Nasdaq Economic Institute",
+      "url": "https://www.nasdaq.com/economic-institute/chartstopper-101626",
+      "observedThrough": "2026-10-16",
+      "verifiedAt": "2026-10-18T07:55:47.486294+00:00",
+      "verificationStatus": "VERIFIED_PROVIDER_COMMENTARY",
+      "note": "仅核验其自身Nasdaq-100约跌5%的表述。其Fed概率、战争和企业新闻引用其他机构，本轮不将转述视为该事项一手证明。"
+    },
+    {
+      "id": "nasdaq-giw-candidate",
+      "name": "Nasdaq Composite 官方候选报价",
+      "publisher": "Nasdaq GIW",
+      "url": "https://indexes.nasdaq.com/Index/Overview/COMP",
+      "observedThrough": "2026-10-16 · 候选 Last，最终收盘未确认",
+      "accessedAt": "2026-10-18",
+      "note": "已显示 Last 26,140.03；不能仅凭 Last 标签确认最终历史收盘或准确首次发布时间。周回报仍 UNKNOWN，不回填旧判断。",
+      "verificationStatus": "PROVIDER_CANDIDATE_NOT_FINAL_CLOSE"
+    }
+  ],
+  "calculations": [
+    {
+      "id": "cpi-core-3m",
+      "formula": "100*((I_m/I_m_minus_3)^4-1)",
+      "operands": {
+        "2026-09": 338.896,
+        "2026-06": 336.065
+      },
+      "result": 3.4124037788220596,
+      "display": "3.41%",
+      "status": "PASS",
+      "sourceIds": [
+        "cpi-series"
+      ]
+    },
+    {
+      "id": "pce-core-3m",
+      "formula": "100*((I_m/I_m_minus_3)^4-1)",
+      "operands": {
+        "2026-08": 130.455,
+        "2026-05": 129.796
+      },
+      "result": 2.046398408308314,
+      "display": "2.05%",
+      "status": "PASS",
+      "sourceIds": [
+        "pce-series"
+      ]
+    },
+    {
+      "id": "sp500-week",
+      "formula": "100*(close_2026_10_16/close_2026_10_09-1)",
+      "operands": {
+        "2026-10-16": 7659.44,
+        "2026-10-09": 7811.54
+      },
+      "result": -1.947119262014918,
+      "display": "−1.95%",
+      "status": "PASS",
+      "sourceIds": [
+        "fred-sp500"
+      ]
+    },
+    {
+      "id": "dow-week",
+      "formula": "100*(close_2026_10_16/close_2026_10_09-1)",
+      "operands": {
+        "2026-10-16": 52002.41,
+        "2026-10-09": 51654.95
+      },
+      "result": 0.6726557667755095,
+      "display": "+0.67%",
+      "status": "PASS",
+      "sourceIds": [
+        "fred-djia"
+      ]
+    },
+    {
+      "id": "breakeven-10y",
+      "formula": "nominal10y-real10y",
+      "operands": {
+        "nominal10y": 5.09,
+        "real10y": 2.74
+      },
+      "result": 2.35,
+      "display": "2.35%",
+      "status": "PASS",
+      "sourceIds": [
+        "treasury-nominal",
+        "treasury-real"
+      ]
+    },
+    {
+      "id": "weekly-real-change",
+      "formula": "100*(real_10_16-real_10_09)",
+      "operands": {
+        "2026-10-16": 2.74,
+        "2026-10-09": 2.91
+      },
+      "result": -17,
+      "display": "−17bp",
+      "status": "PASS",
+      "sourceIds": [
+        "treasury-real"
+      ]
+    },
+    {
+      "id": "weekly-nominal-change",
+      "formula": "100*(nominal_10_16-nominal_10_09)",
+      "operands": {
+        "2026-10-16": 5.09,
+        "2026-10-09": 5.24
+      },
+      "result": -15,
+      "display": "−15bp",
+      "status": "PASS",
+      "sourceIds": [
+        "treasury-nominal"
+      ]
+    },
+    {
+      "id": "weekly-2y-change",
+      "formula": "100*(yield_10_16-yield_10_09)",
+      "operands": {
+        "2026-10-16": 4.74,
+        "2026-10-09": 4.8
+      },
+      "result": -6,
+      "display": "−6bp",
+      "status": "PASS",
+      "sourceIds": [
+        "treasury-nominal"
+      ]
+    },
+    {
+      "id": "weekly-breakeven-change",
+      "formula": "100*((nominal-real)_10_16-(nominal-real)_10_09)",
+      "operands": {
+        "2026-10-16": 2.35,
+        "2026-10-09": 2.33
+      },
+      "result": 2,
+      "display": "+2bp",
+      "status": "PASS",
+      "sourceIds": [
+        "treasury-nominal",
+        "treasury-real"
+      ]
+    },
+    {
+      "id": "hy-change",
+      "formula": "100*(OAS_10_15-OAS_09_17)",
+      "operands": {
+        "2026-10-15": 3.23,
+        "2026-09-17": 2.7
+      },
+      "result": 53,
+      "display": "+53bp",
+      "status": "PASS",
+      "sourceIds": [
+        "fred-hy"
+      ]
+    },
+    {
+      "id": "ig-change",
+      "formula": "100*(OAS_10_15-OAS_09_17)",
+      "operands": {
+        "2026-10-15": 0.84,
+        "2026-09-17": 0.78
+      },
+      "result": 6,
+      "display": "+6bp",
+      "status": "PASS",
+      "sourceIds": [
+        "fred-ig"
+      ]
+    },
+    {
+      "id": "payroll-three-month-average",
+      "formula": "(July_revised+August_revised+September)/3",
+      "operands": {
+        "2026-07": -10000,
+        "2026-08": 133000,
+        "2026-09": 29000
+      },
+      "result": 50666.666666666664,
+      "display": "约5.1万人/月",
+      "status": "PASS",
+      "sourceIds": [
+        "bls-jobs"
+      ]
+    }
+  ],
+  "mainCase": {
+    "title": "能源推高通胀，政策与盈利等待下一轮验证",
+    "thesis": "通胀压力已有证据，持续扩散仍待确认；政策刚向收紧方向调整，股票还需要盈利和信用共同验证。",
+    "summary": "9月CPI较强，8月核心PCE动量较温和，两者观察期不同。9月Fed加息，但这不能推出10月必再加息或当前已强限制性。本周实际利率下行、标普仍跌；盈利兑现与风险补偿比单一利率解释更值得追踪。",
+    "confidence": "条件性工作判断，未校准成概率",
+    "notEstablished": [
+      "没有验证出1–6个月崩盘概率",
+      "没有证明当前政策强限制性",
+      "没有一手完整期货截点，因此下次会议概率UNKNOWN",
+      "没有截至10月末验收通过的个股广度锚点，因此正式B状态UNKNOWN"
+    ],
+    "confirmation": [
+      "后续同一版本核心PCE动量与分项广度持续抬升",
+      "信用利差扩大延续并扩散，企业指引或现金流同时走弱",
+      "实际利率重新上升且需求/盈利未能抵消融资与贴现压力"
+    ],
+    "falsification": [
+      "汽油完整月均回落，随后核心PCE动量和分项压力连续减弱",
+      "实际利率和企业融资成本同步下降，信用收窄且财报支持盈利预期",
+      "招聘弱化转为持续裁员、工时和实际需求一起下降时，应改写为增长压力情景，不能硬套再通胀主线"
+    ]
+  },
+  "checks": {
+    "metricCount": 26,
+    "verifiedMetricCount": 25,
+    "unknownMetricCount": 1,
+    "arithmeticChecks": 12,
+    "calendarTimezoneChecks": 11,
+    "historicalRulesReconciled": 8,
+    "newFinancialBacktestsRun": 0,
+    "formalProspectiveRecordsCreated": 0
+  },
+  "limits": [
+    "本轮是现况来源与算术核验，不是新回归、回测或预测有效性证明。",
+    "一手含数据原提供商及官方FRED分发，不表示所有市场数据均为公共领域或有无限再分发许可；只展示有限研究快照。",
+    "25/26原有指标本轮核验或复算通过；纳斯达克综合指数完整10/16全周为UNKNOWN。来源核验完成时间不是原始发布时间。",
+    "没有纳入未经许可的历史盈利修订数据；FactSet公开周报只作当前背景。",
+    "正式前瞻账本尚无预测，不把当前研究解释回填为11月首期。10月末名单未验收，正式广度UNKNOWN。",
+    "Fed9月纪要支持当时的条件性再加息倾向；不能替代10月新沟通，也不能推导某次会议的精确概率。",
+    "市场已计价程度无法从这一组水平可靠压缩成百分比，股票下跌原因也未被因果识别。"
+  ],
+  "presentationRevision": {
+    "date": "2026-10-18",
+    "reason": "Independent final QA: distinguish Nasdaq candidate Last from confirmed close; freeze BLS release URLs; clarify final-demand PPI selling-price measure.",
+    "originalResearchReviewPreserved": true,
+    "numericValuesChanged": false
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Polo’s market notes",
+  "name_zh": "Polo 的市场解读",
+  "prepared_at_utc": "2026-10-21T12:29:35.662469+00:00",
+  "scope": "Public presentation export; branding, host-relative links and public-scope history explanation. Supplier data-quality review details excluded. Financial values, forecasts, frozen protocol and scored research results unchanged. No new validation run.",
+  "research_view_issued": "2026-10-19",
+  "research_version": "v4",
+  "availability_explanation_updated": "2026-10-21",
+  "snapshot_policy": "Website is a published research snapshot, not a live data feed. Original observation and review dates are retained.",
+  "archived_qa_policy": "final-qa.json documents its original 2026-10-18 release. Its old file hashes do not certify this renamed public export.",
+  "frozen_protocol_sha256": "dcdf9dccd42fc4ac521f741b1514366640d301b545dba08e3ebe46f83486e71c",
+  "excluded": [
+    "raw vendor files",
+    "stock-level prices and index membership tables",
+    "private collection and judgment ledgers",
+    "browser or API credentials",
+    "Sites hosting metadata"
+  ]
+}

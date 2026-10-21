@@ -1,0 +1,24 @@
+{
+  "version": "historical-pilot-v1",
+  "specified_before_running": true,
+  "scope": "Retrospective research pilot; not a live or point-in-time trading model",
+  "sample_start": "1990-01",
+  "sample_end": "2025-06",
+  "last_outcome_month": "2025-12",
+  "target": "Any of the next six month-end cumulative total returns from the signal month is <= -15%; not daily maximum drawdown",
+  "features": [
+    {"id": "core_cpi_3m", "formula": "100*((CPILFESL[t-1]/CPILFESL[t-4])^4-1)", "flag": ">=3 percent"},
+    {"id": "ff_change_12m", "formula": "FEDFUNDS[t-1]-FEDFUNDS[t-13]", "flag": ">=1 percentage point"},
+    {"id": "curve_10y_3m", "formula": "GS10[t-1]-TB3MS[t-1]", "flag": "<=0 percentage points"},
+    {"id": "credit_change_3m", "formula": "(BAA[t-1]-AAA[t-1])-(BAA[t-4]-AAA[t-4])", "flag": ">=0.25 percentage points"}
+  ],
+  "lag": "All predictor input observations lagged one calendar month for a conservative publication proxy; revised current vintage remains a limitation",
+  "flags": "Equal-weight count of the four flags. Caution if count >=2. No threshold search.",
+  "model": "Ridge logistic regression: standardized four features, intercept unpenalized, sum negative log likelihood + 0.5*sum(beta^2); fixed penalty 1, no tuning",
+  "train": "1990-01 through 2011-06; six-month purge before fixed 2012 boundary",
+  "holdout": "2012-01 through 2025-06; outcomes available through 2025-12",
+  "baseline": "Constant training event prevalence on holdout",
+  "metrics": ["Brier score", "AUC", "event count and event prevalence", "risk-flag conditional event rates"],
+  "cases": ["1999-12", "2000-02", "2007-09", "2017-12", "2020-01", "2021-12"],
+  "limit": "Overlapping labels, few independent crises, current-vintage revisions, no valuations/earnings, broad market not Nasdaq, monthly not intramonth losses, observational not causal, no 2026 model forecast"
+}

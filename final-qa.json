@@ -1,0 +1,62 @@
+{
+  "id": "independent-final-qa-20261018",
+  "status": "PASS_WITH_EXPLICIT_UNKNOWNS_AND_MODEL_LIMITS",
+  "date": "2026-10-18",
+  "scope": "Independent financial source, calculation, timestamp, frozen-logic and frontend QA. No new backtest, fitted parameters or formal prospective decision.",
+  "independentReviews": {
+    "financial": {
+      "verifiedObservations": 25,
+      "unknownObservations": 1,
+      "arithmeticChecksPassed": 12,
+      "timezoneConversionsPassed": 11,
+      "resolutionChecksPassed": 20
+    },
+    "frozenLogic": {
+      "threeValuedCombinations": 27,
+      "assertionsPassed": 378,
+      "invalidInputCasesRejected": 4,
+      "protocolUnchanged": true
+    }
+  },
+  "corrections": [
+    "Distinguish Nasdaq GIW candidate Last from confirmed historical closing endpoint; weekly return remains UNKNOWN.",
+    "Use fixed BLS CPI and productivity release archives.",
+    "Describe final-demand PPI as producer selling prices rather than a pure input-cost measure.",
+    "Describe breadth as weak participation level, not an unmeasured deterioration trend.",
+    "Clarify later-state changes never overwrite old decisions; notice budgets apply separately with state-transition counting."
+  ],
+  "uiChecks": {
+    "desktopViewport": "1440x1000",
+    "routesPassed": 6,
+    "horizontalOverflow": false,
+    "runtimeErrorsObserved": 0,
+    "rateOnlyScenario": "PASS",
+    "noDoubleCountingScenario": "PASS",
+    "resetActualUnknown": "PASS",
+    "methodologyDisclosure": "PASS",
+    "earningsDetail": "PASS",
+    "exportOutlookSection": "PASS"
+  },
+  "limitations": [
+    "Source verification today does not prove receipt before an earlier cutoff.",
+    "Nasdaq full-week return remains UNKNOWN pending a confirmed final closing endpoint.",
+    "October B/T/R remain UNKNOWN until accepted inputs and actual receipts exist.",
+    "All previously viewed history is development evidence. H1 is an organizational hypothesis; H2 predictive value is unvalidated.",
+    "Conditional simulations do not write forecasts or alter the ledger; no calibrated probabilities or return predictions."
+  ],
+  "fileHashes": {
+    "data.js": "fa976520a456891dffae99afe6e12a1e0d8c23826672d9d3251b0a426adfa463",
+    "app.js": "0e79075becc6501ee691b04d284b8353fed58afd4e6fc1508e5c2a64b5fc3fa3",
+    "outlook.js": "4e9306f64868a325810a8c1f30dff9ebf43477f1e5341b4c91082b5cf5bd1800",
+    "outlook.css": "93b5112cf19dca0a05a7d7e7f7598de47b3481ce421523f1c241e58b7aa806ee",
+    "outlook-protocol.json": "dcdf9dccd42fc4ac521f741b1514366640d301b545dba08e3ebe46f83486e71c",
+    "financial-review.json": "38aa5d8ed0c8a8083ee25e3f9a772a41f5591474736f99a1fe12d04eda1358f9"
+  },
+  "primarySourceExamples": [
+    "https://www.bls.gov/news.release/archives/cpi_10142026.htm",
+    "https://www.bls.gov/news.release/archives/ppi_10152026.htm",
+    "https://www.bea.gov/news/2026/personal-income-and-outlays-august-2026",
+    "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm",
+    "https://indexes.nasdaq.com/Index/Overview/COMP"
+  ]
+}
