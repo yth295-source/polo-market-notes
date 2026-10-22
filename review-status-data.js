@@ -1,19 +1,19 @@
 export const REVIEW_STATUS = {
   "forecast_id": "wf-20261021-v5",
-  "review_id": "heartbeat-research-20261021T210521Z",
-  "review_completed_at_utc": "2026-10-22T09:38:16.494563+00:00",
-  "review_event_sha256": "4bc6973199ffb4a2335a526d690a8cdd6b660b64df63106ca3f3d862a2385cd1",
+  "review_id": "heartbeat-research-20261022T115916Z",
+  "review_completed_at_utc": "2026-10-22T12:56:36.831280+00:00",
+  "review_event_sha256": "1a103f0ca0a9b95be699c2870089f567f32f4461bf62baaa381ffa9d0f60c3b4",
   "disposition": "WATCH",
   "evidence_health": "PARTIAL",
   "reviewer": "Polo’s market notes · research review",
-  "summary": "维持 v5 的震荡与分化主情景，增加观察：新一期周薪中位数涨幅落后同期物价，但单项统计不足以推翻政策判断；信用数据源维护中，暂不能确认最新信用变化。",
-  "scope": "本轮来源收取：10/22 04:19–04:51 UTC；审阅于下列时间完成。核对10/21美债、Q3周薪，复核已发布CPI/PCE/申领失业金、Fed公告列表和FactSet盈利文章。原签发日、固定预测期限与全站旧观察日期保留。",
+  "summary": "维持 v5 的震荡与分化主情景。官方信用数据源已恢复，继续观察信用压力；10/21美债读数与上一轮一致。已有周薪信号仍需后续就业与物价数据确认。10/22申领失业金的新一期读数尚未核验，暂不据此改变判断。",
+  "scope": "本轮来源收取：10/22 12:22–12:30 UTC；后续审阅在下列时间完成。先做正式采集，再复核10/21美债、截至10/20信用资料、Q3周薪、已发布CPI/PCE及Fed/FactSet列表。原签发日、固定期限与全站旧观察日期保留，不代表审阅完成时的实时行情。",
   "limitations": [
-    "HY本轮收到FRED维护页。329bp只是10/19最后已核验读数；最新值及变化未知，不能视为信用恶化或已证实稳定。",
-    "Q3周薪来自家庭调查中位数，受人员结构与工时影响，不能替代ECI或小时工资；继续看10/22申领、10/29GDP/PCE及10/30ECI。",
-    "部分BLS/DOL原始下载403，指定项目以官方页面提取复核；州就业复用旧证据。本轮未穷尽公司新财报、全部Fed发言或实时政策概率。",
-    "行业利润权重仍待核对；10月末个股广度须10/30收盘后验收。正式实验输入不足保持UNKNOWN，不影响已有依据的研究观点。",
-    "这是本轮实际来源快照的审阅，不代表审阅完成时的实时行情；低频数据沿用各自观察期。"
+    "信用来源已能核验；公开摘要保留定性判断与来源链接。完整数据和收取版本留在私有研究账本。",
+    "Q3周薪仍是10/21已发布的同一期家庭调查中位数，受人员结构与工时影响；不能替代ECI或小时工资。",
+    "部分BLS/DOL原始下载403，指定项目通过官方页面提取复核；州就业复用旧证据。未穷尽公司新财报、全部Fed发言或实时政策概率。",
+    "行业利润权重仍待核对；10月末个股广度须10/30收盘后验收。正式月度输入仍只有7–9月，10月缺失保持UNKNOWN。",
+    "美东10/22 08:30后读取的官方PDF提取结果仍显示10/15版；这不证明官方尚未发布。新一期读数及变化暂记未知，旧值不充当本期。"
   ],
   "observations": [
     {
@@ -38,18 +38,18 @@ export const REVIEW_STATUS = {
       "source": "U.S. Treasury"
     },
     {
+      "label": "信用资料复核",
+      "value": "源已恢复 · 继续观察",
+      "observation_date": "2026-10-20",
+      "url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
+      "source": "FRED／ICE · 原始资料"
+    },
+    {
       "label": "Q3周薪中位数同比",
       "value": "+1.5%（同期CPI +3.5%）",
       "observation_date": "2026-Q3；10/21发布",
       "url": "https://www.bls.gov/news.release/wkyeng.nr0.htm",
       "source": "BLS"
-    },
-    {
-      "label": "HY利差：仅最后已核验值",
-      "value": "329bp；最新未知",
-      "observation_date": "2026-10-19",
-      "url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
-      "source": "FRED／ICE；本轮源维护"
     }
   ]
 };
