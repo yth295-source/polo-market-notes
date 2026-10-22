@@ -1,55 +1,54 @@
 {
   "forecast_id": "wf-20261021-v5",
-  "review_id": "heartbeat-research-20261022T115916Z",
-  "review_completed_at_utc": "2026-10-22T12:56:36.831280+00:00",
-  "review_event_sha256": "1a103f0ca0a9b95be699c2870089f567f32f4461bf62baaa381ffa9d0f60c3b4",
+  "review_id": "heartbeat-research-20261022T211046Z",
+  "review_completed_at_utc": "2026-10-22T22:20:24.141028+00:00",
+  "review_event_sha256": "dcb5e9a252f676419e4c9f4159c6285b9d5f904fdd99c7deec668a3283c4a878",
   "disposition": "WATCH",
   "evidence_health": "PARTIAL",
   "reviewer": "Polo’s market notes · research review",
-  "summary": "维持 v5 的震荡与分化主情景。官方信用数据源已恢复，继续观察信用压力；10/21美债读数与上一轮一致。已有周薪信号仍需后续就业与物价数据确认。10/22申领失业金的新一期读数尚未核验，暂不据此改变判断。",
-  "scope": "本轮来源收取：10/22 12:22–12:30 UTC；后续审阅在下列时间完成。先做正式采集，再复核10/21美债、截至10/20信用资料、Q3周薪、已发布CPI/PCE及Fed/FactSet列表。原签发日、固定期限与全站旧观察日期保留，不代表审阅完成时的实时行情。",
+  "summary": "维持 v5 的震荡与分化主情景。10/22美债收益率明显回落，最新已核验信用利差收窄，折现率压力暂缓。新一期初请下降、续请上升，仍需区分低裁员与招聘韧性；单日利率变化不足以改写Fed路径或年底市场判断。",
+  "scope": "本轮晚醒，按10/22实际收取时间留存；先完成正式采集，再核对官方利率、信用、10/22初请、已发布CPI/PCE与周薪及Fed/FactSet列表。旧季度和月度发布重读不算新数据；原观点日期与固定窗口保留。",
   "limitations": [
-    "信用来源已能核验；公开摘要保留定性判断与来源链接。完整数据和收取版本留在私有研究账本。",
-    "Q3周薪仍是10/21已发布的同一期家庭调查中位数，受人员结构与工时影响；不能替代ECI或小时工资。",
-    "部分BLS/DOL原始下载403，指定项目通过官方页面提取复核；州就业复用旧证据。未穷尽公司新财报、全部Fed发言或实时政策概率。",
-    "行业利润权重仍待核对；10月末个股广度须10/30收盘后验收。正式月度输入仍只有7–9月，10月缺失保持UNKNOWN。",
-    "美东10/22 08:30后读取的官方PDF提取结果仍显示10/15版；这不证明官方尚未发布。新一期读数及变化暂记未知，旧值不充当本期。"
+    "10/22初请19.4万，较修订后的上周20万减少0.6万；上周原报19.9万已修订。续请为截至10/10当周172.8万，较修订后的上周增加2.5万；两项观察周不同。",
+    "没有将美债回落归因于某一数据，也没有由收益率反推实时加息概率。信用资料仅公开定性摘要和来源链接。",
+    "部分BLS/DOL原文下载403，指定发布通过官方页面提取核对；州就业及部分日历复用旧证据。未穷尽公司新财报与全部Fed发言。",
+    "行业盈利权重、纳指前瞻分母仍有缺口；10月末广度须10/30收盘后验收。10月正式月度输入尚缺，保持UNKNOWN。"
   ],
   "observations": [
     {
       "label": "2年期美债",
-      "value": "4.81%",
-      "observation_date": "2026-10-21",
+      "value": "4.65%",
+      "observation_date": "2026-10-22",
       "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_yield_curve",
       "source": "U.S. Treasury"
     },
     {
       "label": "10年期名义利率",
-      "value": "5.13%",
-      "observation_date": "2026-10-21",
+      "value": "4.96%",
+      "observation_date": "2026-10-22",
       "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_yield_curve",
       "source": "U.S. Treasury"
     },
     {
       "label": "10年期实际利率",
-      "value": "2.76%",
-      "observation_date": "2026-10-21",
+      "value": "2.64%",
+      "observation_date": "2026-10-22",
       "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_real_yield_curve",
       "source": "U.S. Treasury"
     },
     {
       "label": "信用资料复核",
-      "value": "源已恢复 · 继续观察",
-      "observation_date": "2026-10-20",
+      "value": "利差收窄 · 继续观察",
+      "observation_date": "2026-10-21",
       "url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
-      "source": "FRED／ICE · 原始资料"
+      "source": "FRED／ICE"
     },
     {
-      "label": "Q3周薪中位数同比",
-      "value": "+1.5%（同期CPI +3.5%）",
-      "observation_date": "2026-Q3；10/21发布",
-      "url": "https://www.bls.gov/news.release/wkyeng.nr0.htm",
-      "source": "BLS"
+      "label": "初请失业金",
+      "value": "19.4万",
+      "observation_date": "截至2026-10-17当周；10/22发布",
+      "url": "https://www.dol.gov/ui/data.pdf",
+      "source": "U.S. DOL"
     }
   ]
 }
