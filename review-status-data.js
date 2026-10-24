@@ -1,8 +1,8 @@
 export const REVIEW_STATUS = {
   "forecast_id": "wf-20261021-v5",
-  "review_id": "heartbeat-research-20261024T120244Z",
-  "review_completed_at_utc": "2026-10-24T12:04:18.397796+00:00",
-  "review_event_sha256": "9fc39187d2b2c0387e45f5d64a5144006d47d6f01f4bb3ea0d8a9c013c9c3765",
+  "review_id": "heartbeat-research-20261024T205616Z",
+  "review_completed_at_utc": "2026-10-24T20:57:08.270231+00:00",
+  "review_event_sha256": "458f6c8b4efaea26f68d6c990a2723dd12f3b9569a2f020089e8c247c9c80688",
   "disposition": "WATCH",
   "evidence_health": "PARTIAL",
   "reviewer": "Polo’s market notes · research review",
@@ -13,7 +13,7 @@ export const REVIEW_STATUS = {
     "没有将美债回落归因于某一数据，也没有由收益率反推实时加息概率。信用资料仅公开定性摘要和来源链接。",
     "本轮BLS/DOL原文下载403，CPI、周薪、初请及州就业复用上一轮证据，不标成本轮新核验；部分日历亦复用。未穷尽公司新财报与全部Fed发言。",
     "10/23美债与10/22信用观察日不同。FactSet盈利29.5%与收入12.7%为已报实际加未报估计；覆盖变化不能当成同一组公司盈利修订，18.7倍是供应商前瞻倍数而非年底合理PE。CY2027 EPS421.65仍是10/16旧锚，本轮未核验新年度值。",
-    "行业盈利权重、纳指前瞻分母仍有缺口；10月末广度须10/30收盘后验收。10月正式月度输入尚缺，保持UNKNOWN；BAA/AAA/FII10首次收取网络失败，重试后成功；旧失败记录继续保留。"
+    "行业盈利权重、纳指前瞻分母仍有缺口；10月末广度须10/30收盘后验收。10月正式月度输入尚缺，保持UNKNOWN；BAA/AAA/FII10本轮均成功收取；旧失败记录继续保留。"
   ],
   "observations": [
     {
