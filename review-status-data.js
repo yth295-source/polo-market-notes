@@ -1,13 +1,13 @@
 export const REVIEW_STATUS = {
   "forecast_id": "wf-20261021-v5",
-  "review_id": "heartbeat-research-20261025T205518Z",
-  "review_completed_at_utc": "2026-10-25T20:56:41.710305+00:00",
-  "review_event_sha256": "b486fab8ae961419eff04368062c7c1114da9faebc1a2325734440591068ca04",
+  "review_id": "heartbeat-research-20261026T115949Z",
+  "review_completed_at_utc": "2026-10-26T12:01:48.696706+00:00",
+  "review_event_sha256": "db79d2f7f7177a25ad5a99330e882f20f45e9eac72da29e106e8f3816e0fb85e",
   "disposition": "WATCH",
   "evidence_health": "PARTIAL",
   "reviewer": "Polo’s market notes · research review",
   "summary": "维持 v5 的震荡与分化主情景。本轮成功核对的利率、信用与FactSet盈利摘要均与上一轮一致：此前利差扩大仍需观察，盈利支撑尚在，但仅24%的已报覆盖不足以确认全面改善。未取得新发布的项目明确复用旧证据。",
-  "scope": "本轮晚醒，按10/25实际收取时间留存；先完成正式采集，再核对利率、信用、PCE、Fed列表及FactSet10/23摘要。BLS与DOL原文请求失败，CPI、周薪及初请明确复用上一轮已核验证据，本轮没有新备用核验。旧季度和月度发布重读不算新数据；原观点日期与固定窗口保留。",
+  "scope": "本轮晚醒，按10/26实际收取时间留存；先完成正式采集，再核对利率、信用、PCE、Fed列表及FactSet10/23摘要。BLS与DOL原文请求失败，CPI、周薪及初请明确复用上一轮已核验证据，本轮没有新备用核验。旧季度和月度发布重读不算新数据；原观点日期与固定窗口保留。",
   "limitations": [
     "10/22初请19.4万，较修订后的上周20万减少0.6万；上周原报19.9万已修订。续请为截至10/10当周172.8万，较修订后的上周增加2.5万；两项观察周不同。",
     "没有将美债回落归因于某一数据，也没有由收益率反推实时加息概率。信用资料仅公开定性摘要和来源链接。",
