@@ -1,46 +1,46 @@
 {
   "forecast_id": "wf-20261021-v5",
-  "review_id": "heartbeat-research-20261026T115949Z",
-  "review_completed_at_utc": "2026-10-26T12:01:48.696706+00:00",
-  "review_event_sha256": "db79d2f7f7177a25ad5a99330e882f20f45e9eac72da29e106e8f3816e0fb85e",
+  "review_id": "heartbeat-research-20261026T205820Z",
+  "review_completed_at_utc": "2026-10-27T00:42:57.204043+00:00",
+  "review_event_sha256": "8bdef4ebc21f5537ff4f719102a8bf4ba2ab72f38b0d4590ba5b6da46a13a669",
   "disposition": "WATCH",
   "evidence_health": "PARTIAL",
   "reviewer": "Polo’s market notes · research review",
-  "summary": "维持 v5 的震荡与分化主情景。本轮成功核对的利率、信用与FactSet盈利摘要均与上一轮一致：此前利差扩大仍需观察，盈利支撑尚在，但仅24%的已报覆盖不足以确认全面改善。未取得新发布的项目明确复用旧证据。",
-  "scope": "本轮晚醒，按10/26实际收取时间留存；先完成正式采集，再核对利率、信用、PCE、Fed列表及FactSet10/23摘要。BLS与DOL原文请求失败，CPI、周薪及初请明确复用上一轮已核验证据，本轮没有新备用核验。旧季度和月度发布重读不算新数据；原观点日期与固定窗口保留。",
+  "summary": "维持 v5 震荡与分化主情景。最新2年期利率略降，10年期名义及实际利率持平；信用利差略收窄，仍高于原基准。新利润率摘要支持盈利韧性，但估值收益、行业分化与未报估计仍要求关注盈利质量。",
+  "scope": "本轮晚醒，全部按实际UTC收取时间留存，跨UTC午夜不回记。核对10/26美债、10/23信用观察、新FactSet10/26利润率摘要及Fed、BEA列表。BLS/DOL原文403，明确复用此前官方摘录；未开展新的备用核验。原签发日期、期限和基准保留。",
   "limitations": [
-    "10/22初请19.4万，较修订后的上周20万减少0.6万；上周原报19.9万已修订。续请为截至10/10当周172.8万，较修订后的上周增加2.5万；两项观察周不同。",
-    "没有将美债回落归因于某一数据，也没有由收益率反推实时加息概率。信用资料仅公开定性摘要和来源链接。",
-    "本轮BLS/DOL原文下载403，CPI、周薪、初请及州就业复用上一轮证据，不标成本轮新核验；部分日历亦复用。未穷尽公司新财报与全部Fed发言。",
-    "10/23美债与10/22信用观察日不同。FactSet盈利29.5%与收入12.7%为已报实际加未报估计；覆盖变化不能当成同一组公司盈利修订，18.7倍是供应商前瞻倍数而非年底合理PE。CY2027 EPS421.65仍是10/16旧锚，本轮未核验新年度值。",
-    "行业盈利权重、纳指前瞻分母仍有缺口；10月末广度须10/30收盘后验收。10月正式月度输入尚缺，保持UNKNOWN；BAA/AAA/FII10本轮均成功收取；旧失败记录继续保留。"
+    "FactSet Q3利润率14.9%是混合实际与估计；Q2的17.0%受部分公司估值收益影响，剔除公司的15.1%也不是全指数经常性利润率。不能据此上调EPS或目标价。",
+    "新利润率原文未来季度范围与数字数量不一致，相关前瞻利润率未纳入判断，等待澄清。",
+    "美债观察日10/26与信用10/23不同。信用只公开定性摘要。未核验实时政策概率或穷尽发行人财报与Fed发言。",
+    "BLS/DOL本轮原文下载失败；初请19.4万为截至10/17当周、10/22发布的旧证据，不是本轮新发布；CPI、周薪及州就业亦复用旧证据。",
+    "CY2027 EPS421.65仍为10/16旧锚；行业权重和纳指前瞻分母仍有缺口。广度须10/30收盘后验收；10月正式输入仍UNKNOWN。"
   ],
   "observations": [
     {
       "label": "2年期美债",
-      "value": "4.69%",
-      "observation_date": "2026-10-23",
+      "value": "4.68%",
+      "observation_date": "2026-10-26",
       "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_yield_curve",
       "source": "U.S. Treasury"
     },
     {
       "label": "10年期名义利率",
       "value": "5.00%",
-      "observation_date": "2026-10-23",
+      "observation_date": "2026-10-26",
       "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_yield_curve",
       "source": "U.S. Treasury"
     },
     {
       "label": "10年期实际利率",
       "value": "2.66%",
-      "observation_date": "2026-10-23",
+      "observation_date": "2026-10-26",
       "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_real_yield_curve",
       "source": "U.S. Treasury"
     },
     {
       "label": "信用资料复核",
-      "value": "利差扩大 · 保持警觉",
-      "observation_date": "2026-10-22",
+      "value": "略收窄，仍高于原基准",
+      "observation_date": "2026-10-23",
       "url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
       "source": "FRED／ICE"
     },
@@ -57,6 +57,13 @@
       "observation_date": "截至2026-10-17当周；10/22发布",
       "url": "https://www.dol.gov/ui/data.pdf",
       "source": "U.S. DOL"
+    },
+    {
+      "label": "标普Q3混合净利润率",
+      "value": "14.9%",
+      "observation_date": "2026-Q3；10/26摘要，含未报估计",
+      "url": "https://insight.factset.com/sp-500-reporting-second-highest-net-profit-margin-in-more-than-15-years-for-q3-2026",
+      "source": "FactSet"
     }
   ]
 }
