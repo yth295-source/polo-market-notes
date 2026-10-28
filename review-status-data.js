@@ -1,12 +1,12 @@
 export const REVIEW_STATUS = {
   "forecast_id": "wf-20261021-v5",
-  "review_id": "heartbeat-research-20261027T205740Z",
-  "review_completed_at_utc": "2026-10-27T21:00:08.765455+00:00",
-  "review_event_sha256": "db3bc11b3f0a13db88309ab2f8cd94afca16c90c03aacdd0871b314b4b754bf8",
+  "review_id": "heartbeat-research-20261028T115940Z",
+  "review_completed_at_utc": "2026-10-28T12:01:09.088017+00:00",
+  "review_event_sha256": "9753d21787b0b9db2d1013ea6ced447829d103765bbade7afd52bc553fa345e8",
   "disposition": "WATCH",
   "evidence_health": "PARTIAL",
   "reviewer": "Polo’s market notes · research review",
-  "summary": "维持 v5 震荡与分化主情景。信用利差继续收窄，10年期名义及实际利率小降，融资与折现压力有所缓和；此前信用预警的力度减弱，但单日改善尚不足以确认持续转好。等待Fed决议与后续通胀、盈利证据。",
+  "summary": "维持 v5 震荡与分化主情景。本轮成功核对的利率、信用及盈利读数与上一轮一致。此前信用压力缓和仍是最新可用观察，不算新增一天的确认；等待Fed决议与后续通胀、盈利证据。",
   "scope": "本轮晚醒，全部按实际UTC收取时间留存，跨UTC午夜不回记。核对10/27美债、10/26信用观察、已于上一轮收取的FactSet10/26利润率摘要及Fed、BEA列表。BLS/DOL原文403，明确复用此前官方摘录；未开展新的备用核验。原签发日期、期限和基准保留。",
   "limitations": [
     "FactSet Q3利润率14.9%是混合实际与估计；Q2的17.0%受部分公司估值收益影响，剔除公司的15.1%也不是全指数经常性利润率。不能据此上调EPS或目标价。",
