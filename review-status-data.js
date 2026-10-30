@@ -1,17 +1,17 @@
 export const REVIEW_STATUS = {
   "forecast_id": "wf-20261021-v5",
-  "review_id": "heartbeat-research-20261029T210301Z",
-  "review_completed_at_utc": "2026-10-29T21:05:47.332973+00:00",
-  "review_event_sha256": "dfa54c5b1a6865eacdae675c8cd91038c40306d60f06f363347b0cf9c3543725",
+  "review_id": "heartbeat-research-20261030T121116Z",
+  "review_completed_at_utc": "2026-10-30T12:14:48.569030+00:00",
+  "review_event_sha256": "468b7976e214c81d6fdab422a7c8a65c0a9447a8ea9388b88a07bfbff3c90595",
   "disposition": "WATCH",
   "evidence_health": "PARTIAL",
   "reviewer": "Polo’s market notes · research review",
-  "summary": "维持 v5 震荡与分化主情景。Q3增长强、裁员少，但9月实际消费近乎持平，核心PCE同比升至3.1%，8月核心环比也被上修。利率下降与信用收窄缓解部分压力，尚不足以改变年底政策或股票主路径。",
-  "scope": "核对10/29 BEA GDP与PCE原始发布、DOL官方PDF网页提取、财政部曲线、FRED信用、Fed声明及既有FactSet公开摘要；保留真实收取时间、历史版本与差异。",
+  "summary": "维持 v5 震荡与分化主情景。已核对的增长、通胀、利率与信用证据较上轮未变：Q3增长强，但9月实际消费近乎持平，核心价格仍有压力。本次复核早于10/30 ECI预定发布窗口，不含其结果。",
+  "scope": "复核既有BEA GDP/PCE原文、Fed声明、财政部曲线、FRED信用及FactSet公开摘要；成功来源正文未变，BEA仅页脚日期更新。初请复用上轮官方网页提取，本次未重新走备用路线。",
   "limitations": [
     "GDP为初值且3.4%是季度环比年化；不能直接转换为盈利增速。季度核心PCE2.5%年化与9月核心同比3.1%口径不同。",
     "9月核心PCE环比0.3%，8月由上版0.2%修订为0.3%；单次发布不代表12月必然加息，也不推断Fed会前已掌握本次数据。",
-    "DOL直连失败，初请采用本次官方PDF网页提取，保留403；BLS旧CPI等仍为原日期证据。",
+    "BLS/DOL本次直连失败；初请复用10/29官方PDF网页提取，保留原日期，未伪装成本次新发布；ECI尚未核对。",
     "信用观察10/28早于本次GDP/PCE；不以日频利率变动识别单一政策因果，不发布实时政策概率。",
     "FactSet旧摘要未变，不等于新公司财报已全部检查；本轮未完整检查发行人财报、能源与Fed记者会问答。CY2027 EPS421.65仍为10/16锚。",
     "10/26利润率原文前瞻季度与数字映射矛盾仍隔离；广度待10/30收盘后验收，正式10月输入仍UNKNOWN。"
