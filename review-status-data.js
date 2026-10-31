@@ -1,20 +1,20 @@
 export const REVIEW_STATUS = {
   "forecast_id": "wf-20261021-v5",
-  "review_id": "heartbeat-research-20261030T210404Z",
-  "review_completed_at_utc": "2026-10-30T21:10:11.016537+00:00",
-  "review_event_sha256": "454eb1b70342b4c9f7baeb811ba95ae5b1781fb3b59f60fcca4afbedc624fb6c",
+  "review_id": "heartbeat-research-20261031T120237Z",
+  "review_completed_at_utc": "2026-10-31T12:06:34.237073+00:00",
+  "review_event_sha256": "d7022ae1972242a844d30d3bd81486ad0b482a86efa6841f9ee8ad25b08a523c",
   "disposition": "WATCH",
   "evidence_health": "PARTIAL",
   "reviewer": "Polo’s market notes · research review",
-  "summary": "维持 v5 震荡与分化主情景。季度薪酬成本增速放缓、实际利率下降；盈利增长读数上升，但超预期幅度偏小，信用利差反弹。证据方向不一致，继续观察。",
-  "scope": "本轮核对 BLS 官方 ECI 网页提取、财政部曲线、FRED信用及FactSet10/30盈利摘要；重读BEA与Fed原文。月末名单新文件已入库并生成待审草稿，尚无合格广度。",
+  "summary": "维持 v5 震荡与分化主情景。本轮已核对的利率、信用、Fed、BEA和FactSet核心读数未变；季度薪酬成本放缓与信用反弹的分歧仍需观察。",
+  "scope": "重新收取财政部、FRED、Fed、BEA与FactSet来源，核对正文差异；ECI及初请复用已有官方证据。本轮未全面核对发行人新财报。价格文件已检查覆盖，但正式月末广度尚未验收。",
   "limitations": [
     "ECI季度变化为季调，年度变化为未季调；私人部门薪酬同比略升，不能概括为全面降温或必然停止加息。",
-    "BLS/DOL直连失败保留；ECI通过官方网页提取核验，初请复用10/29证据。",
+    "BLS/DOL本次直连失败；ECI复用10/30官方网页提取、初请复用10/29证据，均不标成本次新发布。",
     "信用观察10/29，早于ECI发布；日频利率变化不能识别单一宏观因果。",
     "FactSet60%已报，增长为实际与估计混合；不同财报进度的超预期率不能直接作同样本比较。季度盈利增长不等于CY2027 EPS上修。",
     "未全面复核新公司财报现金质量、能源或Fed问答。EPS421.65仍是10/16共识锚。",
-    "月末成分股草稿尚待完整事件覆盖、身份与价格连续性验收；正式广度仍UNKNOWN。"
+    "已验的价格文件只到10/29；正在补收必要新版本。名单完整覆盖、证券身份与价格连续性尚待验收，正式广度仍UNKNOWN。"
   ],
   "observations": [
     {
