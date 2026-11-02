@@ -1,13 +1,13 @@
 export const REVIEW_STATUS = {
   "forecast_id": "wf-20261021-v5",
-  "review_id": "heartbeat-research-20261101T215741Z",
-  "review_completed_at_utc": "2026-11-01T21:58:40.348955+00:00",
-  "review_event_sha256": "1b373915fe2d534935832ed383ee6e0041d808c4b100fec9a5e43c0787b31346",
+  "review_id": "heartbeat-research-20261102T130142Z",
+  "review_completed_at_utc": "2026-11-02T13:07:02.388638+00:00",
+  "review_event_sha256": "6ba8da31177d0e6a218d501876b8c5bbdd58385e10eeb67262c3a347a68c28af",
   "disposition": "WATCH",
   "evidence_health": "PARTIAL",
   "reviewer": "Polo’s market notes · research review",
-  "summary": "维持 v5 震荡与分化主情景。本轮已核对的利率、信用、Fed、BEA和FactSet核心读数未变；季度薪酬成本放缓与信用反弹的分歧仍需观察。",
-  "scope": "核对Fed、BEA、Treasury、FRED信用及FactSet公开来源，成功收取的正文与上一轮一致。BLS及初请直连失败，复用此前证据。未全面复核新增发行人财报。月末价格覆盖和公司行动清单复用此前本地审计，不冒充新供应商版本；正式广度未验收。",
+  "summary": "本周累计漂移复核维持 v5 震荡与分化主情景。通胀持续性、薪酬增速放缓、利率回落与盈利支撑并存，暂未确认主情景排序改变。",
+  "scope": "核对18项Fed、BEA、Treasury、FRED信用及FactSet公开来源；正文核心读数未变，三项页面仅页脚或相关文章变动。完成W45累计漂移复核。BLS及初请直连失败，复用此前证据；未全面复核新增发行人财报，正式广度尚未验收。",
   "limitations": [
     "BLS及DOL直连失败，相关已公布读数复用旧证据；不能声称本轮重新核验全部发布。",
     "已收取价格文件覆盖10/30，但名单完整覆盖、证券身份与价格连续性尚未验收，正式广度仍UNKNOWN。",
