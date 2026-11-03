@@ -1,13 +1,13 @@
 {
   "forecast_id": "wf-20261021-v5",
-  "review_id": "heartbeat-research-20261102T220301Z",
-  "review_completed_at_utc": "2026-11-02T22:04:21.020322+00:00",
-  "review_event_sha256": "91947dcc7574a4a7800e5f15e5f3c19b978e16fbab27a70ee0bcdb9899d44dd9",
+  "review_id": "heartbeat-research-20261103T125744Z",
+  "review_completed_at_utc": "2026-11-03T12:59:41.161094+00:00",
+  "review_event_sha256": "4ba38dd03692b85453ecae9404987f2aa3f33831b950596a4338212cec633dab",
   "disposition": "WATCH",
   "evidence_health": "PARTIAL",
   "reviewer": "Polo’s market notes · research review",
   "summary": "维持v5震荡与分化主情景；信用利差扩大、模型隐含风险溢价上升，继续观察。名义与实际利率变化方向不同，尚不足以确认主情景逆转。",
-  "scope": "检查18项公开来源。11/2美债曲线及10/30信用观察更新；NYU公布11/1隐含ERP，但其利率输入口径仍需核对。Fed、BEA及既有盈利报告核心正文未变。新增FactSet播客仅发现标题，未审听。BLS/DOL直连失败，复用旧证据。",
+  "scope": "本次检查24个来源入口，18个成功收取；16个正文与上次一致，BEA日历及新闻页仅页脚日期改变。既有观察值按原日期复用；6个BLS／DOL直接请求失败，不能证明这些来源没有更新。未完成全体发行人、播客音频、能源及实时政策计价复核；广度尚未验收。",
   "limitations": [
     "BLS及DOL直连失败，相关已公布读数复用旧证据；不能声称本轮重新核验全部发布。",
     "已收取价格文件覆盖10/30，但名单完整覆盖、证券身份与价格连续性尚未验收，正式广度仍UNKNOWN。",
